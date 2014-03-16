@@ -1,0 +1,36 @@
+{% extends 'layout_template.html' %}
+
+
+{% block body %}
+
+{% for g in games %}
+<div class="col-md-12">
+	<h1>Match {{g.match_id}}</h1>
+	<div class="col-md-10 col-md-offset-1" align=left>
+		<p>Duration: {{ g.duration / 60.0 }}</p>
+		<p>Mode: {{g.game_mode}}</p>
+		<p>Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>
+		
+	</div>
+	<div class="col-md-10 col-md-offset-1">
+	
+		<div class="panel panel-default">
+			<h4 class="panel-heading">Radiant Team</h4>
+			<div class="panel-body">
+
+				{% for p in g.players if p.slot < 5 %}
+				<div class="col-md-2">
+					<h4>{{ p.account_id }}</h4>
+					<p>Hero {{p.hero_id}}</p>
+					<p>Slot {{p.slot}}</p>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+
+	</div>	
+</div>
+{% endfor %}
+
+{% endblock %}
+

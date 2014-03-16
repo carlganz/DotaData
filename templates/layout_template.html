@@ -1,0 +1,66 @@
+{# Jinja2 Required Arguments #}
+{#
+	Python Object bssep
+	
+#}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Set this to the main language of your site -->
+<head>
+    <!-- Universal -->
+    <meta charset="utf-8">
+        
+    <!-- Define a viewport to mobile devices to use - telling the browser to assume that the page is as wide as the device (width=device-width) and setting the initial page zoom level to be 1 (initial-scale=1.0) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <!-- Include the site stylesheet -->
+
+   	
+   	<script>
+   	$(document).ready(function () {
+
+    $('#sub').click(function (event) {
+
+	    	var textInput = $("#form_text").val()
+			var jsonInput = JSON.stringify({'input':textInput})
+			var url = 'request.html'
+			
+			$.post(url, jsonInput)
+			.done(function() { alert('done')})
+	    	.fail(function(d, s, e) { alert("error " + e); })
+			
+	    })
+	});
+   	</script>
+    {% block js %}{% endblock %}
+
+    <!---------------------------------------------------------------->
+    <!--------------------------------------------------------------------->
+
+    <title>{% block title %}Template Title{% endblock %}</title>
+
+    <!-- Enter a brief description of your page -->
+    <meta name="description" content="Flask Layout Template -- djmorrsee.com">
+	
+
+</head>
+<body>
+    <div class="col-md-10 col-md-offset-1 fullHeight">
+
+        <div class="col-md-12 bodyMain" align=center>
+            {% block body %}
+            {% endblock %}
+        </div>
+
+    </div>    
+    
+</body>
+</html>
