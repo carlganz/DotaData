@@ -22,24 +22,8 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <!-- Include the site stylesheet -->
-
-   	
-   	<script>
-   	$(document).ready(function () {
-
-    $('#sub').click(function (event) {
-
-	    	var textInput = $("#form_text").val()
-			var jsonInput = JSON.stringify({'input':textInput})
-			var url = 'request.html'
-			
-			$.post(url, jsonInput)
-			.done(function() { alert('done')})
-	    	.fail(function(d, s, e) { alert("error " + e); })
-			
-	    })
-	});
-   	</script>
+	<link href="{{ url_for('static', filename='styles/style.css')}}" rel="stylesheet">
+	
     {% block js %}{% endblock %}
 
     <!---------------------------------------------------------------->
@@ -53,11 +37,28 @@
 
 </head>
 <body>
+
+
     <div class="col-md-10 col-md-offset-1 fullHeight">
 
         <div class="col-md-12 bodyMain" align=center>
-            {% block body %}
-            {% endblock %}
+			<div class="nav-bar panel panel-default">
+				<h1 class="page-title">DotaData</h1>
+				<div class="panel-body">
+					<a class="col-md-2 col-md-offset-1 btn btn-default" href="/games">Games</a>
+					<a class="col-md-2 btn btn-default" href="/players">Players</a>
+					<a class="col-md-2 btn btn-default" href="/stats">Stats</a>
+					<a class="col-md-2 btn btn-default" href="/about">About</a>
+					<a class="col-md-2 btn btn-default" href="/aboutdb">Database</a>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-body">
+		        {% block body %}
+		        {% endblock %}
+		        </div>
+	        </div>
         </div>
 
     </div>    

@@ -10,10 +10,21 @@ db = SQLAlchemy(app)
 
 @app.route('/')
 def home():
+    return render_template('landing.html')
+
+@app.route('/games')
+def games():
     games = GameData.query.all()
     ni_games = GetNiGames()
     my_ni_games = GetMyNiGames()
     return render_template('gameviewer.html', games=games)
+
+@app.route('/about')
+@app.route('/players')
+@app.route('/stats')
+@app.route('/aboutdb')
+def tbd():
+    return 'To be Created'
 
 def MakeData():
     ResetTable()
