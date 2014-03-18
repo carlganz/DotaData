@@ -24,7 +24,7 @@ def games():
 @app.route('/stats')
 @app.route('/aboutdb')
 def tbd():
-    return 'To be Created'
+    return render_template('tbd.html')
 
 def MakeData():
     ResetTable()
