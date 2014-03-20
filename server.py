@@ -14,31 +14,23 @@ def home():
 
 @app.route('/games')
 def games():
-    games = GameData.query.all()
-    ni_games = GetNiGames()
-    my_ni_games = GetMyNiGames()
+    games = GameData.query.all()[:10]
     return render_template('gameviewer.html', games=games)
+
+
+@app.route('/stats')
+def stats():
+    c = GetHeroCount()
+    
+    
+    return str(c.most_common())
 
 @app.route('/about')
 @app.route('/players')
-@app.route('/stats')
 @app.route('/aboutdb')
 def tbd():
-    return render_template('tbd.html')
-
-def MakeData():
-    ResetTable()
-    
-    mine = RequestMyGames()
-    nicks = RequestNiGames()
-    _all = RequestGames()
-
-    games = mine + nicks + _all
-    for g in games:
-        AddGame(g)    
+    return render_template('tbd.html')   
 
 if __name__ == '__main__':
     #MakeData()
-    
-    
     app.run(debug=True)
