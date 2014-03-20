@@ -2,5 +2,12 @@
 
 
 {% block body %}
-<div><h1>To Be Created!</h1></div>
+<div><h1>
+    {% if message %}
+    {{message}}
+    {% else %}
+    To Be Created!
+    {% endif %}
+
+</h1></div>
 {% endblock %}

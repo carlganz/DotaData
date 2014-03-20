@@ -1,8 +1,12 @@
 from flask import Flask, render_template
-from bin.dbschema import GameData, PlayerData, AbilityUpgrades
-from bin.api_requests import *
-from bin.api_data import *
-from bin.dbactions import *
+
+# API
+from bin.api.api_requests import *
+from bin.api.api_data import *
+
+# Database
+from bin.db.db_actions import *
+from bin.db.db_schema import GameData, PlayerData, AbilityUpgrades
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/d2db01.db'
@@ -21,15 +25,19 @@ def games():
 @app.route('/stats')
 def stats():
     c = GetHeroCount()
-    
-    
     return str(c.most_common())
 
 @app.route('/about')
+def about():
+    return render_template('tbd.html', message = 'About the website and us!')
+
 @app.route('/players')
+def players():
+    return render_template('tbd.html', message = 'Player information!')
+
 @app.route('/aboutdb')
 def tbd():
-    return render_template('tbd.html')   
+    return render_template('tbd.html', message = 'Details about the database')   
 
 if __name__ == '__main__':
     #MakeData()

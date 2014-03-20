@@ -2,7 +2,7 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from api_requests import *
+from bin.api.api_requests import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db/d2db01.db'
