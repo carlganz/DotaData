@@ -2,7 +2,7 @@ from flask import Flask, render_template
 
 # API
 from bin.api.api_requests import *
-from bin.api.api_data import *
+from bin.data.json_data import *
 
 # Database
 from bin.db.db_actions import *

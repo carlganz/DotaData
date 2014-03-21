@@ -1,5 +1,5 @@
 from bin.db.db_schema import *
-from bin.api.api_data import *
+from bin.data.json_data import *
 from collections import Counter
 import json
 
