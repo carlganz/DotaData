@@ -18,7 +18,8 @@ def GetMyGames ():
     return GameData.query.filter(GameData.players.any(account_id = my_steam_id)).all()
 
 def GetMyNiGames ():
-    return GameData.query.filter(GameData.players.any(account_id = my_steam_id)).filter(GameData.players.any(account_id = ni_steam_id)).all()
+    return GameData.query.filter(GameData.players.any(account_id = my_steam_id))\
+           .filter(GameData.players.any(account_id = ni_steam_id)).all()
 
 def GetNiGames ():
     return GameData.query.filter(GameData.players.any(account_id = ni_steam_id)).all()
@@ -27,12 +28,50 @@ def GetAllGames ():
     return GameData.query.all()
 
 def GetHeroCount ():
-    Games = GameData.query.all()[:500]
+    G = GameData.query.all()[:100]
     heroes = Counter()
-    for g in Games:
+    for g in G:
         heroes.update(list(GetHeroFromID(p.hero_id) for p in g.players))
     
     return heroes
+
+def GetDistinctModes():
+    return db.session.query(GameData.game_mode.distinct()).all()
+
+def GetDistinctLobbies():
+    return db.session.query(GameData.lobby_type.distinct()).all()
+
+
+def GetGamesByMode(mode):
+    G = GameData.query.filter(GameData.game_mode == mode)
+    return G[:100]
+
+def GetGamesByLobby(lobby):
+    G = GameData.query.filter(GameData.lobby_type == lobby)
+    return G[:100]
+
+def GetUniquePlayers():
+    players = list()
+    q = GameQuery()
+    q.FilterByMode(1)
+    q.FilterByLobby(4)
+    players = list(q.GetQuery())
+    return sorted(list(players))
+
+class GameQuery():
+    def __init__(self):
+        self.baseq = GameData.query
+
+    def FilterByMode(self, mode):
+        self.baseq = self.baseq.filter(GameData.game_mode == mode)
+
+    def FilterByLobby(self, lobby):
+        self.baseq = self.baseq.filter(GameData.lobby_type == lobby)
+
+    def GetQuery(self):
+        return self.baseq.all()
+
+
 
 def Reg (x1, x2):
 

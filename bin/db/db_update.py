@@ -1,6 +1,6 @@
-from dbschema import *
-from dbactions import *
-from api_requests import *
+from bin.db.db_schema import *
+from bin.db.db_actions import *
+from bin.api.api_requests import *
 
 from pprint import pprint
 
@@ -33,6 +33,4 @@ def UpdateGames ():
         AddGame(g)
     print('Complete')
     return
-
-UpdateGames()
 

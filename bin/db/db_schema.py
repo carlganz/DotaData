@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from bin.api.api_requests import *
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db/d2db01.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../db/d2db01.db'
 db = SQLAlchemy(app)
 
 def GetMatchDetails(m_id):
@@ -163,4 +163,3 @@ class AbilityUpgrades(db.Model):
 
     def __repr__(self):
         return 'Ability: ' + str(self.ability)
-        

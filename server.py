@@ -5,7 +5,9 @@ from bin.api.api_requests import *
 from bin.data.json_data import *
 
 # Database
+from bin.db.db_update import *
 from bin.db.db_actions import *
+from bin.db.db_pretty import *
 from bin.db.db_schema import GameData, PlayerData, AbilityUpgrades
 
 app = Flask(__name__)
@@ -18,14 +20,16 @@ def home():
 
 @app.route('/games')
 def games():
-    games = GameData.query.all()[:10]
+    games = []
+    for g in GetGamesByLobby(7):
+        games.append(PrettyGame(g))
     return render_template('gameviewer.html', games=games)
 
 
 @app.route('/stats')
 def stats():
-    c = GetHeroCount()
-    return str(c.most_common())
+    p = GetDistinctModes()
+    return render_template('tbd.html', message = str(GameData.query.count()))
 
 @app.route('/about')
 def about():
@@ -37,6 +41,7 @@ def players():
 
 @app.route('/aboutdb')
 def tbd():
+    UpdateGames()
     return render_template('tbd.html', message = 'Details about the database')   
 
 if __name__ == '__main__':
