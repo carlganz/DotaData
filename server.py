@@ -21,7 +21,7 @@ def home():
 @app.route('/games')
 def games():
     games = []
-    for g in GetGamesByLobby(7):
+    for g in TestQuery():
         games.append(PrettyGame(g))
     return render_template('gameviewer.html', games=games)
 
@@ -41,7 +41,6 @@ def players():
 
 @app.route('/aboutdb')
 def tbd():
-    UpdateGames()
     return render_template('tbd.html', message = 'Details about the database')   
 
 if __name__ == '__main__':

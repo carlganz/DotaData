@@ -58,6 +58,11 @@ def GetUniquePlayers():
     players = list(q.GetQuery())
     return sorted(list(players))
 
+def TestQuery():
+    q = GameQuery()
+    q.FilterByItemID(10)
+    return q.GetQuery()
+
 class GameQuery():
     def __init__(self):
         self.baseq = GameData.query
@@ -67,6 +72,18 @@ class GameQuery():
 
     def FilterByLobby(self, lobby):
         self.baseq = self.baseq.filter(GameData.lobby_type == lobby)
+
+    def FilterByPlayerID(self, pID):
+        self.baseq = self.baseq.filter(GameData.players.any(account_id = pID))
+
+    def FilterByHeroID(self, hID):
+        self.baseq = self.baseq.filter(GameData.players.any(hero_id = hID))
+
+    def FilterByPlayerHero(self, pID, hID):
+        self.baseq = self.baseq.filter(GameData.players.any(hero_id = hID, account_id = pID))
+
+    def FilterByItemID(self, iID):
+        self.baseq = self.baseq.filter(GameData.players.any(item0 = iID)).union(self.baseq.filter(GameData.players.any(item1=iID)))
 
     def GetQuery(self):
         return self.baseq.all()

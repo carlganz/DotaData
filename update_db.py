@@ -4,13 +4,9 @@ from bin.api.api_requests import *
 # Adds the most recent (maybe) 500 games to the database
 # skips games already added
 def UpdateGames ():
-    last_game_id = GameData.query.order_by(GameData.match_id.desc()).first()
-
-    ids = list(g.match_id for g in GameData.query.all())
-    
     _id = None
     games = []
-    
+
     for i in range(0, 5):
         r = Request(1)
         r.StartAtMatchID(_id)
@@ -19,19 +15,49 @@ def UpdateGames ():
 
         for g in _r:
             mid = g['match_id']
-            if mid not in ids:
+            if len(GameData.query.filter(GameData.match_id == mid).all()) == 0:
                 games.append(g)
-        
-        _id = games[-1]['match_id']
-                    
 
-    print(str(len(games)) + ' games to add')
-    for g in games:
-        tid = g['match_id']
-        if tid not in list(_g.match_id for _g in GameData.query.all()):
-            db.session.add(GameData(g))
-    db.session.commit()
-    print('Complete')
+
+        _id = games[-1]['match_id']
+
+
+    print(str(len(games)) + ' games to add - Overall')
+    AddGames(games)
     return
 
+def UpdateGamesWithID(uid):
+    _id = None
+    newgames = []
+
+    for i in range(0, 5):
+        r = Request(1)
+        r.ConstrainByAccountID(uid)
+        r.StartAtMatchID(_id)
+        r.SetMatchesRequested(100)
+        _r = r.MakeRequest()
+
+        for g in _r:
+            mid = g['match_id']
+            if len(GameData.query.filter(GameData.match_id == mid).all()) == 0:
+                newgames.append(g)
+
+        _id = _r[-1]['match_id']
+            
+
+
+    print(str(len(newgames)) + ' games to add')
+    AddGames(newgames)
+
+def AddGames(games):
+    for g in games:
+        if len(GameData.query.filter(GameData.match_id == g['match_id']).all()) == 0 :
+            db.session.add(GameData(g))
+        else:
+            print("Skipping game with id: " + str(g['match_id']))
+    db.session.commit()
+    print('Complete')
+
 UpdateGames()
+UpdateGamesWithID(my_steam_id)
+UpdateGamesWithID(ni_steam_id)
