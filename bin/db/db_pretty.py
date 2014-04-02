@@ -22,10 +22,12 @@ class PrettyGame:
         self.neg_votes = game.neg_votes
         self.players = list(PrettyPlayer(p) for p in game.players)
 
+
 class PrettyPlayer:
     def __init__(self, player):
-        self.hero_id = GetHeroFromID(player.hero_id)
-        self.account_id = player.account_id
+        self.hero_id = GetHeroNameFromID(player.hero_id)
+        self.portrait_url = GetHeroPortraitFromID(player.hero_id)
+        self.account_id = player.account_id if player.account_id != 4294967295 else 'Private'
         self.assists = player.assists
         self.deaths = player.deaths
         self.denies = player.denies
@@ -49,3 +51,13 @@ class PrettyPlayer:
         self.slot = player.slot
         self.tower_damage = player.tower_damage
         self.xpm = player.xpm
+        self.abilities = list(PrettyAbility(a) for a in player.abilities)
+
+
+class PrettyAbility:
+    def __init__(self, ability):
+        self.ability = ability.ability
+        self.level = ability.level
+        self.time = ability.time
+        
+    

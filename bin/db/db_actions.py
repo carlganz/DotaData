@@ -14,53 +14,20 @@ def AddGame (data):
     db.session.add(GameData(data))
     db.session.commit()
 
-def GetMyGames ():
-    return GameData.query.filter(GameData.players.any(account_id = my_steam_id)).all()
-
-def GetMyNiGames ():
-    return GameData.query.filter(GameData.players.any(account_id = my_steam_id))\
-           .filter(GameData.players.any(account_id = ni_steam_id)).all()
-
-def GetNiGames ():
-    return GameData.query.filter(GameData.players.any(account_id = ni_steam_id)).all()
-
-def GetAllGames ():
-    return GameData.query.all()
-
-def GetHeroCount ():
-    G = GameData.query.all()[:100]
-    heroes = Counter()
-    for g in G:
-        heroes.update(list(GetHeroFromID(p.hero_id) for p in g.players))
-    
-    return heroes
-
 def GetDistinctModes():
     return db.session.query(GameData.game_mode.distinct()).all()
 
 def GetDistinctLobbies():
     return db.session.query(GameData.lobby_type.distinct()).all()
 
-
-def GetGamesByMode(mode):
-    G = GameData.query.filter(GameData.game_mode == mode)
-    return G[:100]
-
-def GetGamesByLobby(lobby):
-    G = GameData.query.filter(GameData.lobby_type == lobby)
-    return G[:100]
-
 def GetUniquePlayers():
-    players = list()
-    q = GameQuery()
-    q.FilterByMode(1)
-    q.FilterByLobby(4)
-    players = list(q.GetQuery())
-    return sorted(list(players))
+    players = set(p.account_id for p in PlayerData.query.all())
+    return len(players)
 
 def TestQuery():
     q = GameQuery()
-    q.FilterByItemID(10)
+    q.FilterByPlayerID(my_steam_id)
+    q.FilterByMode(18)
     return q.GetQuery()
 
 class GameQuery():
@@ -87,20 +54,4 @@ class GameQuery():
 
     def GetQuery(self):
         return self.baseq.all()
-
-
-
-def Reg (x1, x2):
-
-    hero_list = json.load(open('bin/data/my_heroes.json'))
-    num = len(hero_list)
-    
-    games = GameData.query.all()
-    for g in games:
-        binary = [110]
-        heros = list(p.hero_id for p in g.players)
-        for i in range(0, 109):
-            binary.append(i in heros)
-
-        
        

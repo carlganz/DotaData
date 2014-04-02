@@ -152,7 +152,7 @@ class AbilityUpgrades(db.Model):
     level = db.Column(db.Integer)
     time = db.Column(db.Integer)
 
-    player = db.relationship('PlayerData', backref = db.backref('abilities', lazy='select'))
+    player = db.relationship('PlayerData', backref = db.backref('abilities', lazy='dynamic'))
     player_id = db.Column(db.Integer, db.ForeignKey('player_data.account_id'))
 
     def __init__(self, data, player):
