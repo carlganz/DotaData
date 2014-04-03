@@ -3,6 +3,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from bin.api.api_requests import *
+import random
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../db/d2db01.db'
@@ -79,7 +80,8 @@ class PlayerData(db.Model):
         account_id = db.Column(db.Integer)
         
         match_id = db.Column(db.Integer, db.ForeignKey('game_data.match_id'))
-
+        unique_pm_id = db.Column(db.Integer, unique = True)
+        
         kills = db.Column(db.Integer)
         deaths = db.Column(db.Integer)
         assists = db.Column(db.Integer)   
@@ -110,10 +112,13 @@ class PlayerData(db.Model):
         def __init__(self, data, game):
                 self.match = game
                 self.hero_id = data['hero_id']
-                if 'account_id' in data:
-                    self.account_id = data['account_id']
+                self.account_id = data['account_id']
+                
+                if self.account_id != 4294967295:
+                    self.unique_pm_id = int(str(game.match_id) + str(self.account_id))
                 else:
-                    self.account_id = -1
+                    self.unique_pm_id = int(str(game.match_id) + str(random.randint(10000, 100000)))
+                
                 self.assists = data['assists']
                 self.deaths = data['deaths']
                 self.denies = data['denies']
@@ -153,7 +158,7 @@ class AbilityUpgrades(db.Model):
     time = db.Column(db.Integer)
 
     player = db.relationship('PlayerData', backref = db.backref('abilities', lazy='dynamic'))
-    player_id = db.Column(db.Integer, db.ForeignKey('player_data.account_id'))
+    player_id = db.Column(db.Integer, db.ForeignKey('player_data.unique_pm_id'))
 
     def __init__(self, data, player):
         self.ability = data['ability']

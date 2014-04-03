@@ -7,6 +7,10 @@ skill_data = json.load(open('bin/data/my_abilities.json'))
 lobby_data = json.load(open('bin/data/my_lobbies.json'))
 gm_data = json.load(open('bin/data/my_modes.json'))
 item_data = json.load(open('bin/data/my_items.json'))
+account_ids = json.load(open('bin/data/account_ids.json'))
+
+def LookupAccountID(aID):
+	return str(account_ids[str(aID)]) if str(aID) in account_ids else aID
 
 def GetHeroNameFromID(hID):
     for h in hero_data:

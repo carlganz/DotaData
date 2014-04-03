@@ -1,11 +1,12 @@
 from bin.db.db_schema import *
 from bin.data.json_data import *
+from datetime import datetime
 
 class PrettyGame:
     def __init__(self, game):
         self.match_id = game.match_id
         self.match_seq = game.match_seq
-        self.start_time = game.start_time
+        self.start_time = datetime.fromtimestamp(game.start_time)
         self.duration = game.duration
         self.lobby_type = GetLobbyFromID(game.lobby_type)
         self.game_mode = GetGMFromID(game.game_mode)
@@ -27,7 +28,7 @@ class PrettyPlayer:
     def __init__(self, player):
         self.hero_id = GetHeroNameFromID(player.hero_id)
         self.portrait_url = GetHeroPortraitFromID(player.hero_id)
-        self.account_id = player.account_id if player.account_id != 4294967295 else 'Private'
+        self.account_id = LookupAccountID(player.account_id) if player.account_id != 4294967295 else 'Private'
         self.assists = player.assists
         self.deaths = player.deaths
         self.denies = player.denies
@@ -52,7 +53,6 @@ class PrettyPlayer:
         self.tower_damage = player.tower_damage
         self.xpm = player.xpm
         self.abilities = list(PrettyAbility(a) for a in player.abilities)
-
 
 class PrettyAbility:
     def __init__(self, ability):

@@ -30,7 +30,7 @@ def UpdateGamesWithID(uid):
     _id = None
     newgames = []
 
-    for i in range(0, 5):
+    for i in range(0, 1):
         r = Request(1)
         r.ConstrainByAccountID(uid)
         r.StartAtMatchID(_id)
@@ -58,6 +58,8 @@ def AddGames(games):
     db.session.commit()
     print('Complete')
 
-UpdateGames()
+db.drop_all()
+db.create_all()
+#UpdateGames()
 UpdateGamesWithID(my_steam_id)
 UpdateGamesWithID(ni_steam_id)

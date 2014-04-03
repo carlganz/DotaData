@@ -27,6 +27,7 @@ def GetUniquePlayers():
 def TestQuery():
     q = GameQuery()
     q.FilterByPlayerID(my_steam_id)
+    q.FilterByPlayerID(ni_steam_id)
     q.FilterByMode(18)
     return q.GetQuery()
 
@@ -53,5 +54,5 @@ class GameQuery():
         self.baseq = self.baseq.filter(GameData.players.any(item0 = iID)).union(self.baseq.filter(GameData.players.any(item1=iID)))
 
     def GetQuery(self):
-        return self.baseq.all()
+        return self.baseq.all()[:10]
        
