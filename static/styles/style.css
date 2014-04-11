@@ -5,6 +5,25 @@
    after all.
    ---------------------------------------------------------*/
 body {
+	background-color:#1C1C1A;
+}
+.panel{
+	border-color: #D50000;
+	background-color: #D50000;
+}
+.panel-body{
+	background-color: #323230;
+	color:#E4C62E;
+}
+.panel-body .panel{
+	background-color: #1C1C1A;
+	border-color:#E3880E;
+	box-shadow: 0 0 30px black;
+}
+
+.btn {
+	background-color: #E4C62E;
+	border-color: #E3880E;
 }
 /* Default link styling */
 a:link {
