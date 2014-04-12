@@ -33,7 +33,7 @@ def stats():
 
 @app.route('/about')
 def about():
-    return render_template('tbd.html', message = 'About the website and us!')
+    return render_template('about_us.html')
 
 @app.route('/players')
 def players():
