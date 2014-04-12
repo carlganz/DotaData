@@ -3,6 +3,17 @@ from bin.api.api_requests import *
 
 # Adds the most recent (maybe) 500 games to the database
 # skips games already added
+def UpdateWithRequestParameters (account_ids = None, game_type = None, hero_ids = None, skill = None, min_players = None, league_id = None):
+    baser = Request(1)
+
+    for id in account_ids:
+        baser.ConstrainByAccountID(id)
+
+    if game_type:
+    	baser
+
+
+
 def UpdateGames ():
     _id = None
     games = []
@@ -30,7 +41,7 @@ def UpdateGamesWithID(uid):
     _id = None
     newgames = []
 
-    for i in range(0, 1):
+    for i in range(0, 5):
         r = Request(1)
         r.ConstrainByAccountID(uid)
         r.StartAtMatchID(_id)
@@ -58,8 +69,9 @@ def AddGames(games):
     db.session.commit()
     print('Complete')
 
-db.drop_all()
-db.create_all()
-#UpdateGames()
+#db.drop_all()
+#db.create_all()
+UpdateGames()
 UpdateGamesWithID(my_steam_id)
 UpdateGamesWithID(ni_steam_id)
+

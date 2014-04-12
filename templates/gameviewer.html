@@ -13,7 +13,7 @@
 </div>
 {% for g in games %}
 <div class="col-md-12 panel panel-default">
-	<h1>Match {{g.match_id}}</h1>
+	<a href="/details?id={{g.match_id}}"><h1>Match {{g.match_id}}</h1></a>
 	<div class="col-md-10 col-md-offset-1" align="center">
 		<p class="col-md-6">Start Time: {{ g.start_time }}</p>
 		<p class="col-md-6">Duration: {{ g.duration / 60.0 }}</p>

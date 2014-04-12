@@ -21,19 +21,17 @@ def GetDistinctLobbies():
     return db.session.query(GameData.lobby_type.distinct()).all()
 
 def GetUniquePlayers():
-    players = set(p.account_id for p in PlayerData.query.all())
+    players = db.session.query(PlayerData.account_id.distinct()).all()
     return len(players)
 
 def TestQuery():
-    q = GameQuery()
-    q.FilterByPlayerID(my_steam_id)
-    q.FilterByPlayerID(ni_steam_id)
-    q.FilterByMode(18)
+    q = GameQuery(1)
     return q.GetQuery()
 
 class GameQuery():
-    def __init__(self):
+    def __init__(self, page):
         self.baseq = GameData.query
+        self.page = page
 
     def FilterByMode(self, mode):
         self.baseq = self.baseq.filter(GameData.game_mode == mode)
@@ -53,6 +51,7 @@ class GameQuery():
     def FilterByItemID(self, iID):
         self.baseq = self.baseq.filter(GameData.players.any(item0 = iID)).union(self.baseq.filter(GameData.players.any(item1=iID)))
 
+# Returns a BaseQuery class
     def GetQuery(self):
-        return self.baseq.all()[:10]
+        return self.baseq.paginate(1, 5).items
        
