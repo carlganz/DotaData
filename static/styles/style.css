@@ -27,19 +27,29 @@ body {
 .panel-body .panel-body{
 	background-color: #1C1C1A;
 }
-.contact .panel-body .a{
-	color:#D50000;
+.panel-body .panel .panel .panel-heading{
+	background-color: #FFB04F;
 }
-.contact .panel-heading{
-	background-color: #06c;
-	color: #06c;
+.panel-body .panel .panel .contact-heading{
+	background-color: #E56666;
 }
-
+.panel-body .panel .panel .contact-body a{
+	color: #D50000;
+}
 .btn {
 	background-color: #FFB04F;
 	border-color: #E3880E;
 }
-/* Default link styling */
+.panel-body .panel .panel .dire{
+	background-color: #EEDC81;
+}
+.panel-body .panel .panel .radiant{
+	background-color: #E56666;
+}
+.panel-body .panel .match{
+	background-color: #FFB04F;
+}
+/* Default link styling #ec5d4c*/
 a:link {
     color: #000;
 }
