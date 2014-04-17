@@ -69,8 +69,8 @@ def AddGames(games):
     db.session.commit()
     print('Complete')
 
-#db.drop_all()
-#db.create_all()
+db.drop_all()
+db.create_all()
 UpdateGames()
 UpdateGamesWithID(my_steam_id)
 UpdateGamesWithID(ni_steam_id)

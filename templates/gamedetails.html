@@ -54,8 +54,8 @@
     </div>
 
  
-    <div class="col-md-12 panel-body">
-        <div class"col-md-12">
+    <div class="panel-body">
+        <div class="col-md-12">
             <p class="col-md-6">Start Time: {{ game.start_time }}</p>
             <p class="col-md-6">Duration: {{ game.duration / 60.0 }}</p>
             <p class="col-md-6">Mode: {{ game.game_mode }}</p>
@@ -64,23 +64,15 @@
     </div>
 </div>
 
-<div class="col-md-12">
-    {% for p in game.players %}
-    <div class="col-md-12 panel panel-default">
-        <div class="col-md-12 panel-body">
-            <div>
-                <div>
-                    <div>
-                        <h2>{{ p.hero_id }}</h2>
-                        <h3>{{ p.account_id }}</h3>
-                    </div>
-                    <img src="{{p.portrait_url}}"/>
-
-                </div>
-            </div>
-
+{% for p in game.players %}
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>{{ p.hero_id }}</h2>
+		  <h3>{{ p.account_id }}</h3>
+        </div>
+        <div class="panel-body">
+			<img src="{{p.portrait_url}}"/>
             <div class="col-md-6">
-                <div class="col-md-12">
                     <h3>Skill Build</h3>
                     {% for i in range(0, 5) %}
                     {% for j in range(0, 5) %}
@@ -95,8 +87,8 @@
                     </div>
                     {% endfor %}
                     {% endfor %}
-                </div>
-                <div class="col-md-12">
+               </div>
+                <div class="col-md-6">
                     <h3>Items</h3>
                     {% for i in range(0, 6) %}
                     <div class="col-md-4">
@@ -104,7 +96,6 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
             <div class="col-md-6" align='left'>
                 <div class="col-md-12">
                     <h3>Level: {{p.level}}</h3>
@@ -122,9 +113,8 @@
                 </div>
             </div>
         </div>
-    </div>
+		  </div>
     {% endfor %}
-
 </div>
 {% endblock %}
 
