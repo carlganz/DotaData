@@ -64,8 +64,8 @@
     </div>
 </div>
 
+{% for p in game.players %}
 <div class="panel panel-default">
-    {% for p in game.players %}
         <div class="panel-heading">
           <h2>{{ p.hero_id }}</h2>
 		  <h3>{{ p.account_id }}</h3>
@@ -113,9 +113,8 @@
                 </div>
             </div>
         </div>
-    </div>
+		  </div>
     {% endfor %}
-
 </div>
 {% endblock %}
 

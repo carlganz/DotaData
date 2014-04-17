@@ -11,7 +11,6 @@ body {
 	border-color: #341813;
 	background-color: #AC0000;
 	color: #f25b14;
-	
 }
 .panel-body{
 	background-color: #1C1C1A;
@@ -23,8 +22,9 @@ body {
 	box-shadow: 0 0 30px black;
 }
 .panel-body .panel .panel-heading {
-	background-color: #F24B14;
+	background-color: #BA4837;
 }
+/* orange: #F24B14 */
 .panel-body .panel-body{
 	background-color: #1C1C1A;
 }
@@ -44,8 +44,11 @@ body {
 	background-color: #19EEFD;
 }
 .btn {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.7, #000), color-stop(1, #AC0000) );
+	background:-moz-linear-gradient( center top, #1C1C1A 20%, #AC0000 100% );
 	background-color: #341813;
 	border-color: #702D29;
+	color:#FFF;
 }
 .btn-nav {
 	-moz-box-shadow:inset 0px 1px 0px 0px #545254;
@@ -106,7 +109,7 @@ a:link {
 }
 
 a:visited {
-    color: #000;
+    color: #E46C27;
 }
 
 a:hover, a:focus {
@@ -131,6 +134,8 @@ body, html {
 	text-align:center;
 	margin-left:auto;
 	margin-right:auto;
+	color: #F24B14;
+	text-shadow: 2px 2px #111;
 }
 
 
