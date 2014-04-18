@@ -50,49 +50,7 @@ body {
 	border-color: #702D29;
 	color:#FFF;
 }
-.btn-nav {
-	-moz-box-shadow:inset 0px 1px 0px 0px #545254;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #545254;
-	box-shadow:inset 0px 1px 0px 0px #545254;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.2, #1C1C1A), color-stop(1, #AC0000) );
-	background:-moz-linear-gradient( center top, #1C1C1A 20%, #AC0000 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1C1C1A', endColorstr='#AC0000');
-	background-color:#1C1C1A;
-	-webkit-border-top-left-radius:6px;
-	-moz-border-radius-topleft:6px;
-	border-top-left-radius:6px;
-	-webkit-border-top-right-radius:6px;
-	-moz-border-radius-topright:6px;
-	border-top-right-radius:6px;
-	-webkit-border-bottom-right-radius:6px;
-	-moz-border-radius-bottomright:6px;
-	border-bottom-right-radius:6px;
-	-webkit-border-bottom-left-radius:6px;
-	-moz-border-radius-bottomleft:6px;
-	border-bottom-left-radius:6px;
-	text-indent:0;
-	border:1px solid #000;
-	display:inline-block;
-	color:#fff;
-	font-size:15px;
-	font-weight:bold;
-	font-style:normal;
-	height:50px;
-	line-height:50px;
-	width:100px;
-	text-decoration:none;
-	text-align:center;
-	text-shadow:1px 1px 0px #470147;
-}
-.btn-nav:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9e2525), color-stop(1, #756675) );
-	background:-moz-linear-gradient( center top, #9e2525 5%, #756675 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e2525', endColorstr='#756675');
-	background-color:#9e2525;
-}.btn-nav:active {
-	position:relative;
-	top:1px;
-}
+
 /* This button was generated using CSSButtonGenerator.com */
 .panel-body .panel .panel .dire{
 	background-color: #6965B7;
@@ -109,7 +67,7 @@ a:link {
 }
 
 a:visited {
-    color: #E46C27;
+    color: #FCE003;
 }
 
 a:hover, a:focus {
