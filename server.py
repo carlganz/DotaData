@@ -35,7 +35,7 @@ def details():
 @app.route('/stats')
 def stats():
     p = GetUniquePlayers()
-    return render_template('tbd.html', message = str(p))
+    return render_template('stats.html')
 
 @app.route('/about')
 def about():
@@ -43,7 +43,7 @@ def about():
 
 @app.route('/players')
 def players():
-    return render_template('tbd.html', message = 'Player information!')
+    return render_template('players.html')
 
 @app.route('/aboutdb')
 def tbd():
