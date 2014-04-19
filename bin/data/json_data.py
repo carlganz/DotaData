@@ -26,7 +26,7 @@ def GetHeroDataNameFromID(hID):
 
 def GetHeroPortraitFromID(hID):
     for h in hero_data:
-        return 'http://cdn.dota2.com/apps/dota2/images/heroes/' + str(GetHeroDataNameFromID(hID)) + '_sb.png'
+        return 'http://cdn.dota2.com/apps/dota2/images/heroes/' + str(GetHeroDataNameFromID(hID)) + '_lg.png'
     return 'UnKnown'
 
 

@@ -10,6 +10,8 @@ accID = '&account_id='
 maReq = '&matches_requested='
 start = '&start_at_match_id='
 date = '&date_min='
+game_mode = '&game_mode='
+hero = '&hero_id='
 
 # Vars #
 my_api_key = '&key=06F26E71DA72FD03C5A1304C565EAA9E'
@@ -19,19 +21,24 @@ ni_steam_id = 133942829
 
 class Request:
     request_type = None
-    acc_id = None
+    
+    acc_id = []
     ma_id = None
+    
     num = None
     start_ma_id = None
+    game_mode = None
+    
+    heroes = []
 
     def __init__(self, _type):
         self.request_type = _type
 
     def __repr__(self):
-        return str(self.request)
+        return str(self.Stringify())
 
     def ConstrainByAccountID(self, acc_id):
-        self.acc_id = acc_id
+        self.acc_id.append(acc_id)
 
     def AddMatchID(self, m_id):
         self.ma_id = m_id
@@ -41,6 +48,12 @@ class Request:
 
     def SetMatchesRequested(self, ma_req):
         self.num = ma_req
+        
+    def SetGameMode(self, gm):
+    	self.game_mode = gm
+    	
+    def ConstrainByHero(self, hID):
+    	self.heroes.append(hID)
 
     def Stringify (self):
         req = ''
@@ -51,17 +64,25 @@ class Request:
         elif self.request_type == 2:
             req += getMatchDetails
 
-        if self.acc_id != None:
-            req += accID + str(self.acc_id)
+            
+        for id in self.acc_id:
+            req = req + str(accID) + str(id)
+            
         if self.ma_id != None:
-            req += str(self.ma_id)
+            req = req + str(self.ma_id)
         else :
             if self.request_type == 2:
                 return 'No Match ID'
+                
         if self.num != None:
             req += maReq + str(self.num)
         if self.start_ma_id != None:
             req += start + str(self.start_ma_id)
+        if self.game_mode != None:
+        	req += game_mode + str(self.game_mode)
+        	
+        for id in self.heroes:
+        	req += hero + str(id)
 
         return req + my_api_key
         

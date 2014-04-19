@@ -134,7 +134,7 @@ class PlayerData(db.Model):
                 self.item4 = data['item_4']
                 self.item5 = data['item_5']
                 self.kills = data['kills']
-                self.last_hits = data['last_hits']
+                self.lh = data['last_hits']
                 if 'leaver_status' in data:
                     self.leaver_status = data['leaver_status']
                 self.level = data['level']

@@ -5,14 +5,69 @@
    after all.
    ---------------------------------------------------------*/
 body {
+	background-color:#000;
 }
-/* Default link styling */
+.panel{
+	border-color: #341813;
+	background-color: #AC0000;
+	color: #f25b14;
+}
+.panel-body{
+	background-color: #1C1C1A;
+	color:#A69A75;
+}
+.panel-body .panel{
+	background-color: #1C1C1A;
+	border-color:#E3880E;
+	box-shadow: 0 0 30px black;
+}
+.panel-body .panel .panel-heading {
+	background-color: #BA4837;
+}
+/* orange: #F24B14 */
+.panel-body .panel-body{
+	background-color: #1C1C1A;
+}
+.panel-body .panel .panel .panel-heading{
+	background-color: #868686;
+}
+.panel-body .panel .panel .contact-heading{
+	background-color: #2080EA;
+}
+.panel-body .panel .panel .contact-body a{
+	color: #D50000;
+}
+.panel-body .panel .panel .danny{
+	background-color: #6965B7;
+}
+.panel-body .panel .panel .lisa{
+	background-color: #19EEFD;
+}
+.btn {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.7, #000), color-stop(1, #AC0000) );
+	background:-moz-linear-gradient( center top, #1C1C1A 20%, #AC0000 100% );
+	background-color: #341813;
+	border-color: #702D29;
+	color:#FFF;
+}
+
+/* This button was generated using CSSButtonGenerator.com */
+.panel-body .panel .panel .dire{
+	background-color: #6965B7;
+}
+.panel-body .panel .panel .radiant{
+	background-color: #19EEFD;
+}
+.panel-body .panel .match{
+	background-color: #2080EA;
+}
+/* Default link styling #ec5d4c*/
 a:link {
     color: #000;
 }
 
 a:visited {
-    color: #000;
+    color: #FCE003;
 }
 
 a:hover, a:focus {
@@ -34,9 +89,11 @@ body, html {
 
 .page-title {
 	display:inline-block;
-	
+	text-align:center;
 	margin-left:auto;
 	margin-right:auto;
+	color: #F24B14;
+	text-shadow: 2px 2px #111;
 }
 
 

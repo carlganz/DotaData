@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # API
 from bin.api.api_requests import *
@@ -25,19 +25,25 @@ def games():
         games.append(PrettyGame(g))
     return render_template('gameviewer.html', games=games)
 
+@app.route('/details')
+def details():
+    id = request.args.get('id')
+    game = PrettyGame(GameData.query.filter(GameData.match_id == id).first())
+    return render_template('gamedetails.html', game = game)
+
 
 @app.route('/stats')
 def stats():
-    p = GetDistinctModes()
-    return render_template('tbd.html', message = str(GameData.query.count()))
+    p = GetUniquePlayers()
+    return render_template('stats.html')
 
 @app.route('/about')
 def about():
-    return render_template('tbd.html', message = 'About the website and us!')
+    return render_template('about_us.html')
 
 @app.route('/players')
 def players():
-    return render_template('tbd.html', message = 'Player information!')
+    return render_template('players.html')
 
 @app.route('/aboutdb')
 def tbd():

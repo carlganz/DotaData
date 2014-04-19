@@ -28,7 +28,7 @@ class PrettyPlayer:
     def __init__(self, player):
         self.hero_id = GetHeroNameFromID(player.hero_id)
         self.portrait_url = GetHeroPortraitFromID(player.hero_id)
-        self.account_id = LookupAccountID(player.account_id) if player.account_id != 4294967295 else 'Private'
+        self.account_id = LookupAccountID(player.account_id) if player.account_id != 4294967295 else 'Private Account'
         self.assists = player.assists
         self.deaths = player.deaths
         self.denies = player.denies
@@ -37,15 +37,25 @@ class PrettyPlayer:
         self.gold_spent = player.gold_spent
         self.hero_damage = player.hero_damage
         self.hero_healing = player.hero_healing
-        self.item0 = GetItemFromID(player.item0)
-        self.item1 = GetItemFromID(player.item1)
-        self.item2 = GetItemFromID(player.item2)
-        self.item3 = GetItemFromID(player.item3)
-        self.item4 = GetItemFromID(player.item4)
-        self.item5 = GetItemFromID(player.item5)
+        
+        self.items = []
+        self.items.append(GetItemFromID(player.item0))
+        self.items.append(GetItemFromID(player.item1))
+        self.items.append(GetItemFromID(player.item2))
+        self.items.append(GetItemFromID(player.item3))
+        self.items.append(GetItemFromID(player.item4))
+        self.items.append(GetItemFromID(player.item5))
+        
+        self.item_urls = []
+        for i in self.items:
+            if i == 'empty':
+                self.item_urls.append('')
+            else:
+                self.item_urls.append('http://cdn-01-origin.steampowered.com/apps/dota2/images/items/' + str(i) + '_lg.png')
+        
+        
         self.kills = player.kills
-        if hasattr(player, 'last_hits'):
-            self.last_hits = player.last_hits
+        self.last_hits = player.lh
         if hasattr(player, 'leaver_status'):
             self.leaver_status = player.leaver_status
         self.level = player.level
@@ -56,7 +66,11 @@ class PrettyPlayer:
 
 class PrettyAbility:
     def __init__(self, ability):
-        self.ability = ability.ability
+        self.ability = GetSkillFromID(ability.ability)
+        if self.ability == 'stats':
+            self.ability_img_url = 'https://raw.githubusercontent.com/kronusme/dota2-api/master/images/stats.png'
+        else:
+            self.ability_img_url = 'http://cdn-01-origin.steampowered.com/apps/dota2/images/abilities/' + str(self.ability) + '_md.png'
         self.level = ability.level
         self.time = ability.time
         
