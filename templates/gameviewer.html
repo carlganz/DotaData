@@ -3,7 +3,7 @@
 
 {% block body %}
 <div class="panel panel-default">
-	<div class="panel-heading"><h1>Filters</h1></div>
+	<div class="panel-heading">Filters</div>
 	<div class="panel-body" align="left">
 		<div class="col-md-2">Sort by:</div>
 		<div class="col-md-4">
@@ -25,26 +25,23 @@
 {% for g in games %}
 <div class="panel panel-default">
 	<div class="panel-heading match">
-		<a href="/details?id={{g.match_id}}"><h1>Match {{g.match_id}}</h1></a>	
-		
+		<a href="/details?id={{g.match_id}}">Match {{g.match_id}}</a>		
 	</div>
 	<div class="panel-body">
 		<div class="panel panel-body">
-			<p class="col-md-6">Start Time: {{ g.start_time }}</p>
-			<p class="col-md-6">Duration: {{ g.duration / 60.0 }}</p>
-			<p class="col-md-6">Mode: {{ g.game_mode }}</p>
-			<p class="col-md-6">Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>		
+			<p class="col-md-3">Start Time: {{ g.start_time }}</p>
+			<p class="col-md-3">Duration: {{ g.duration / 60.0 }} hours</p>
+			<p class="col-md-3">Mode: {{ g.game_mode }}</p>
+			<p class="col-md-3">Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>		
 		</div>
 		<div class="col-md-6">
 		<div class="panel panel-default" {% if g.radiant_win %}style="border:#CDF522 5px solid"{% endif %}>
-			<div class="panel-heading radiant"><h3>Radiant Team</h3></div>
+			<div class="panel-heading radiant">Radiant Team</div>
 			<div class="panel-body">
 				{% for p in g.players if p.slot < 5 %}
 				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
 					<p>{{ p.account_id }}</p>
 					<img src="{{ p.portrait_url }}" width="100%">
-					<p>{{p.hero_id}}</p>
-					<p class="col-md-12" style="font-size:12px">KDA {{p.kills }}/{{p.deaths}}/{{p.assists}}
 				</div>
 				{% endfor %}
 			</div>
@@ -53,14 +50,12 @@
 		
 		<div class="col-md-6">
 		<div class="panel panel-default" {% if not g.radiant_win %}style="border:#CDF522 5px solid"{% endif %}>
-			<div class="panel-heading dire"><h3>Dire Team</h3></div>
+			<div class="panel-heading dire">Dire Team</div>
 			<div class="panel-body">
 				{% for p in g.players if p.slot >= 5 %}
 				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
 					<p>{{ p.account_id }}</p>
 					<img src="{{ p.portrait_url }}" width="100%">
-					<p>{{p.hero_id}}</p>
-					<p class="col-md-12" style="font-size:12px">KDA {{ p.kills }}/{{ p.deaths }}/{{ p.assists }}
 				</div>
 				{% endfor %}
 			</div>

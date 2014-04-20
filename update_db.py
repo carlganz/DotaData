@@ -13,7 +13,6 @@ def UpdateWithRequestParameters (account_ids = None, game_type = None, hero_ids 
     	baser
 
 
-
 def UpdateGames ():
     _id = None
     games = []

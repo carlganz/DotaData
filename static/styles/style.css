@@ -10,42 +10,53 @@ body {
 .panel{
 	border-color: #341813;
 	background-color: #AC0000;
-	color: #f25b14;
+	color: #191819;
 }
 .panel-body{
-	background-color: #1C1C1A;
+	background-color: #191819;
 	color:#A69A75;
 }
 .panel-body .panel{
-	background-color: #1C1C1A;
+	background-color: #191819;
 	border-color:#E3880E;
 	box-shadow: 0 0 30px black;
 }
 .panel-body .panel .panel-heading {
-	background-color: #BA4837;
+	background-color: #232426;
+	color: white;
+	height:50px;
+	font-size: 20pt;
 }
 /* orange: #F24B14 */
 .panel-body .panel-body{
-	background-color: #1C1C1A;
+	background-color: #191819;
 }
 .panel-body .panel .panel .panel-heading{
 	background-color: #868686;
+	height:50px;
+	font-size: 20pt;
 }
 .panel-body .panel .panel .contact-heading{
-	background-color: #2080EA;
+	background-color: #868686;
+	height:50px;
+	font-size: 18pt;
 }
 .panel-body .panel .panel .contact-body a{
 	color: #D50000;
 }
 .panel-body .panel .panel .danny{
-	background-color: #6965B7;
+	background-color: #232426;
+	height: 50px;
+	font-size: 20pt;
 }
 .panel-body .panel .panel .lisa{
-	background-color: #19EEFD;
+	background-color: #232426;
+	height: 50px;
+	font-size: 20pt;
 }
 .btn {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.7, #000), color-stop(1, #AC0000) );
-	background:-moz-linear-gradient( center top, #1C1C1A 20%, #AC0000 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.7, #868686), color-stop(1, #AC0000) );
+	background:-moz-linear-gradient( center top, #868686 20%, #AC0000 100% );
 	background-color: #341813;
 	border-color: #702D29;
 	color:#FFF;
@@ -53,13 +64,23 @@ body {
 
 /* This button was generated using CSSButtonGenerator.com */
 .panel-body .panel .panel .dire{
-	background-color: #6965B7;
+	background-color: #56211A;
+	height: 50px;
+	font-size: 18pt;
 }
 .panel-body .panel .panel .radiant{
-	background-color: #19EEFD;
+	background-color: #252D23;
+	height: 50px;
+	font-size: 18pt;
 }
 .panel-body .panel .match{
-	background-color: #2080EA;
+	background-color: #868686;
+	height: 50px;
+	font-size: 20pt;
+}
+.panel-body .panel .match a{
+	font-size: 20pt;
+	color:#000;
 }
 /* Default link styling #ec5d4c*/
 a:link {
@@ -92,8 +113,8 @@ body, html {
 	text-align:center;
 	margin-left:auto;
 	margin-right:auto;
-	color: #F24B14;
-	text-shadow: 2px 2px #111;
+	color: #868686;
+	text-shadow: 2px 2px #191819;
 }
 
 
