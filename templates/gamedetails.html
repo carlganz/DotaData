@@ -49,8 +49,8 @@
 -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h1>Game Details</h1>
-        <h3>{{game.match_id}}</h3>
+        Game Details
+        {{game.match_id}}
     </div>
 
  
@@ -67,8 +67,8 @@
 {% for p in game.players %}
 <div class="panel panel-default">
         <div class="panel-heading">
-          <h2>{{ p.hero_id }}</h2>
-		  <h3>{{ p.account_id }}</h3>
+          {{ p.hero_id }}
+		  {{ p.account_id }}
         </div>
         <div class="panel-body">
 			<img src="{{p.portrait_url}}"/>

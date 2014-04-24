@@ -28,11 +28,11 @@
 		<a href="/details?id={{g.match_id}}">Match {{g.match_id}}</a>		
 	</div>
 	<div class="panel-body">
-		<div class="panel panel-body">
-			<p class="col-md-3">Start Time: {{ g.start_time }}</p>
+		<div class="panel panel-body game-stats">
+			<p class="col-md-4">Start Time: {{ g.start_time }}</p>
 			<p class="col-md-3">Duration: {{ g.duration / 60.0 }} hours</p>
 			<p class="col-md-3">Mode: {{ g.game_mode }}</p>
-			<p class="col-md-3">Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>		
+			<p class="col-md-2">Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>		
 		</div>
 		<div class="col-md-6">
 		<div class="panel panel-default" {% if g.radiant_win %}style="border:#CDF522 5px solid"{% endif %}>
@@ -40,7 +40,7 @@
 			<div class="panel-body">
 				{% for p in g.players if p.slot < 5 %}
 				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
-					<p>{{ p.account_id }}</p>
+					<p class="player-id">{{ p.account_id }}</p>
 					<img src="{{ p.portrait_url }}" width="100%">
 				</div>
 				{% endfor %}

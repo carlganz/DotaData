@@ -24,8 +24,9 @@ body {
 .panel-body .panel .panel-heading {
 	background-color: #232426;
 	color: white;
-	height:50px;
+	height:30px;
 	font-size: 20pt;
+	vertical-align: top;
 }
 /* orange: #F24B14 */
 .panel-body .panel-body{
@@ -33,8 +34,9 @@ body {
 }
 .panel-body .panel .panel .panel-heading{
 	background-color: #868686;
-	height:50px;
+	height:30px;
 	font-size: 20pt;
+	vertical-align: top;
 }
 .panel-body .panel .panel .contact-heading{
 	background-color: #868686;
@@ -65,22 +67,32 @@ body {
 /* This button was generated using CSSButtonGenerator.com */
 .panel-body .panel .panel .dire{
 	background-color: #56211A;
-	height: 50px;
-	font-size: 18pt;
+	height: 30px;
+	font-size: 16pt;
+	vertical-align: top;
 }
 .panel-body .panel .panel .radiant{
 	background-color: #252D23;
-	height: 50px;
-	font-size: 18pt;
+	height: 30px;
+	font-size: 16pt;
+	vertical-align: top;
 }
 .panel-body .panel .match{
 	background-color: #868686;
-	height: 50px;
-	font-size: 20pt;
+	height: 30px;
+	font-size: 8pt;
+	vertical-align: top;
 }
 .panel-body .panel .match a{
-	font-size: 20pt;
+	font-size: 14pt;
 	color:#000;
+	vertical-align: top;
+}
+.game-stats {
+	height: 50px;
+}
+.player-id {
+	font-size: 10pt;
 }
 /* Default link styling #ec5d4c*/
 a:link {
@@ -88,7 +100,7 @@ a:link {
 }
 
 a:visited {
-    color: #FCE003;
+    color: #FFF;
 }
 
 a:hover, a:focus {
