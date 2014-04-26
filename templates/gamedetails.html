@@ -1,79 +1,42 @@
 {% extends 'layout_template.html' %}
 
-
 {% block body %}
-<!--
-{% for g in games %}
-<div class="col-md-12 panel panel-default">
-	<h1>Match {{g.match_id}}</h1>
-	<div class="col-md-10 col-md-offset-1" align="center">
-		<p class="col-md-6">Start Time: {{ g.start_time }}</p>
-		<p class="col-md-6">Duration: {{ g.duration / 60.0 }}</p>
-		<p class="col-md-6">Mode: {{ g.game_mode }}</p>
-		<p class="col-md-6">Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>
-		
-	</div>
-	<div class="col-md-12 panel-body">
-	
-		<div class="panel panel-default" {% if g.radiant_win %}style="background-color:#88ec94"{% endif %}>
-			<h3>Radiant Team</h3>
-			<div class="panel-body">
-				{% for p in g.players if p.slot < 5 %}
-				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
-					<h4>{{ p.account_id }}</h4>
-					<img src="{{ p.portrait_url }}">
-					<p>{{p.hero_id}}</p>
-					<p class="col-md-12" style="font-size:12px">KDA {{p.kills }}/{{p.deaths}}/{{p.assists}}
-				</div>
-				{% endfor %}
-			</div>
-		</div>
-		
-		<div class="panel panel-default" {% if not g.radiant_win %}style="background-color:#ec5d4c"{% endif %}>
-			<h3>Dire Team</h3>
-			<div class="panel-body">
-				{% for p in g.players if p.slot >= 5 %}
-				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
-					<h4>{{ p.account_id }}</h4>
-					<img src="{{ p.portrait_url }}">
-					<p>{{p.hero_id}}</p>
-					<p class="col-md-12" style="font-size:12px">KDA {{ p.kills }}/{{ p.deaths }}/{{ p.assists }}
-				</div>
-				{% endfor %}
-			</div>
-		</div>
-		
-	</div>	
-</div>
-{% endfor %}
--->
+
 <div class="panel panel-default">
     <div class="panel-heading">
         Game Details
         {{game.match_id}}
     </div>
-
- 
     <div class="panel-body">
         <div class="col-md-12">
-            <p class="col-md-6">Start Time: {{ game.start_time }}</p>
-            <p class="col-md-6">Duration: {{ game.duration / 60.0 }}</p>
-            <p class="col-md-6">Mode: {{ game.game_mode }}</p>
-            <p class="col-md-6">Victor: {% if game.radiant_win %} Radiant {% else %} Dire {% endif %} </p>
+            <p class="col-md-4">Start Time: {{ game.start_time }}</p>
+            <p class="col-md-3">Duration: {{ game.duration }} minutes</p>
+            <p class="col-md-3">Mode: {{ game.game_mode }}</p>
+            <p class="col-md-2">Victor: {% if game.radiant_win %} Radiant {% else %} Dire {% endif %} </p>
         </div>
     </div>
 </div>
 
 {% for p in game.players %}
+
 <div class="panel panel-default">
-        <div class="panel-heading">
-          {{ p.hero_id }}
-		  {{ p.account_id }}
+        <div class="panel-heading" style="background-color: {% if loop.index <= 5 %} #252D23; {% else %}  #56211A {% endif %}">
+			<div class="col-md-4 ">{{ p.hero_id }}</div>
+			<div class="col-md-4" align="center">{% if loop.index <= 5 %} Radiant {% else %}  Dire {% endif %}</div>
+			<div class="col-md-4" align="right">{{ p.account_id }}</div>
         </div>
-        <div class="panel-body">
-			<img src="{{p.portrait_url}}"/>
-            <div class="col-md-6">
-                    <h3>Skill Build</h3>
+        <div class="panel-body game-details">
+			<div class="col-md-3">
+				<div> <img src="{{p.portrait_url}}" width="50%"/> </div>
+				<h3>Items</h3>
+                    {% for i in range(0, 6) %}
+                    <div class="col-md-4">
+                        <img src="{{p.item_urls[i]}}" width="50px"/>
+                    </div>
+                    {% endfor %} 
+               </div>
+                <div class="col-md-3">
+					<h3>Skill Build</h3>
                     {% for i in range(0, 5) %}
                     {% for j in range(0, 5) %}
                     <div class="col-md-2 {% if loop.first %} col-md-offset-1 {% endif %}">
@@ -86,32 +49,22 @@
                         {% endif %}
                     </div>
                     {% endfor %}
-                    {% endfor %}
-               </div>
-                <div class="col-md-6">
-                    <h3>Items</h3>
-                    {% for i in range(0, 6) %}
-                    <div class="col-md-4">
-                        <img src="{{p.item_urls[i]}}" width="85px"/>
-                    </div>
-                    {% endfor %}
+                    {% endfor %}                   
                 </div>
-            <div class="col-md-6" align='left'>
-                <div class="col-md-12">
-                    <h3>Level: {{p.level}}</h3>
-                    <h3>XP/M: {{p.xpm}} </h3>
-
-                    <h3>Gold: {{p.gold}} </h3>
-                    <h3>Gold Spent: {{p.gold_spent}}</h3>
-                    <h3>Gold/Minute: {{p.gpm}} </h3>
-                    <h3>K/D/A: {{p.kills}}/{{p.deaths}}/{{p.assists}}
-                    <h3>LH/D: {{p.last_hits}}/{{p.denies}}</h3>
-                    <h3>Damage to Heroes: {{p.hero_damage}}</h3>
-                    <h3>Damage to Towers: {{p.tower_damage}}</h3>
-                    <h3>Allied Healing: {{p.hero_healing}}</h3>
-
-                </div>
-            </div>
+            <div class="col-md-3" align='left'>
+				<h3>Level: {{p.level}}</h3>
+				<h3>XP/M: {{p.xpm}} </h3>
+				<h3>Gold: {{p.gold}} </h3>
+				<h3>Gold Spent: {{p.gold_spent}}</h3>
+				<h3>Gold/Minute: {{p.gpm}} </h3>
+			</div>
+			<div class="col-md-3">
+				<h3>K/D/A: {{p.kills}}/{{p.deaths}}/{{p.assists}}
+				<h3>LH/D: {{p.last_hits}}/{{p.denies}}</h3>
+				<h3>Damage to Heroes: {{p.hero_damage}}</h3>
+				<h3>Damage to Towers: {{p.tower_damage}}</h3>
+				<h3>Allied Healing: {{p.hero_healing}}</h3>
+			</div>
         </div>
 		  </div>
     {% endfor %}

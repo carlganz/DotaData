@@ -30,7 +30,7 @@
 	<div class="panel-body">
 		<div class="panel panel-body game-stats">
 			<p class="col-md-4">Start Time: {{ g.start_time }}</p>
-			<p class="col-md-3">Duration: {{ g.duration / 60.0 }} hours</p>
+			<p class="col-md-3">Duration: {{ g.duration }} minutes</p>
 			<p class="col-md-3">Mode: {{ g.game_mode }}</p>
 			<p class="col-md-2">Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>		
 		</div>
