@@ -18,131 +18,116 @@
 </div>
 
 <div class="panel panel-default">
-	<div class="panel-heading">Radiant</div>
-		<div class="panel-body">
-		{% for p in game.players[:5] %}
-		<div class="panel panel-default">
-        <div class="panel-heading" style="background-color: {% if loop.index <= 5 %} #252D23; {% else %}  #56211A {% endif %}">
-			<div class="col-md-4 ">{{ p.hero_id }}</div>
-			<div class="col-md-4" align="center">{% if loop.index <= 5 %} Radiant {% else %}  Dire {% endif %}</div>
-			<div class="col-md-4" align="right">{{ p.account_id }}</div>                                 
-        </div>        
-        <div class="panel-body game-details">
-			<div class="col-md-3">
-				<div> <img src="{{p.portrait_url}}" width="50%"/> </div>
-				<h3>Items</h3>
+    <div class="panel-heading radiant">
+        Radiant
+    </div>
+    <div class="panel-body">
+        {% for p in game.players[:5] %}
+        <div class="panel panel-defaut">
+            <div class="panel-heading">
+                <div class="col-md-6 ">{{ p.hero_id }}</div>
+                <div class="col-md-6" align="right">{{ p.account_id }}</div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-3">
+                    <div> <img src="{{p.portrait_url}}" width="50%"/> </div>
+                    <h3>Items</h3>
                     {% for i in range(0, 6) %}
                     <div class="col-md-4">
                         <img src="{{p.item_urls[i]}}" width="50px"/>
                     </div>
                     {% endfor %} 
-               </div>
+                </div>
                 <div class="col-md-3">
-					<h3>Skill Build</h3>
+                    <h3>Skill Build</h3>
                     {% for i in range(0, 5) %}
                     {% for j in range(0, 5) %}
                     <div class="col-md-2 {% if loop.first %} col-md-offset-1 {% endif %}">
-                        {% set ind = j + 5 * i %}
-                        {% if p.abilities[ind] %}
-                        <p class="col-md-12">{{ind}}</p>
-                        <img src="{{p.abilities[j + 5 * i].ability_img_url}}" width="64px"/>
-                        {% else %}
-                        <div width="64px" height="64px"></div>
-                        {% endif %}
+                        {% set ind = j + 5 * i %} {% if 
+                        p.abilities[ind] %} <p class="col-md-12">
+                        {{ind}}</p> <img src="{{p.abilities[j + 5 * 
+                        i].ability_img_url}}" width="64px"/> {% else 
+                        %} <div width="64px" height="64px"></div> {% 
+                        endif %}
                     </div>
                     {% endfor %}
                     {% endfor %}                   
                 </div>
-            <div class="col-md-3" align='left'>
-				<h3>Level: {{p.level}}</h3>
-				<h3>XP/M: {{p.xpm}} </h3>
-				<h3>Gold: {{p.gold}} </h3>
-				<h3>Gold Spent: {{p.gold_spent}}</h3>
-				<h3>Gold/Minute: {{p.gpm}} </h3>
-			</div>
-			<div class="col-md-3">
-				<h3>K/D/A: {{p.kills}}/{{p.deaths}}/{{p.assists}}
-				<h3>LH/D: {{p.last_hits}}/{{p.denies}}</h3>
-				<h3>Damage to Heroes: {{p.hero_damage}}</h3>
-				<h3>Damage to Towers: {{p.tower_damage}}</h3>
-				<h3>Allied Healing: {{p.hero_healing}}</h3>
-			</div>
+                <div class="col-md-3" align='left'>
+                    <h3>Level: {{p.level}}</h3>
+                    <h3>XP/M: {{p.xpm}} </h3>
+                    <h3>Gold: {{p.gold}} </h3>
+                    <h3>Gold Spent: {{p.gold_spent}}</h3>
+                    <h3>Gold/Minute: {{p.gpm}} </h3>
+                </div>
+                <div class="col-md-3">
+                    <h3>K/D/A: {{p.kills}}/{{p.deaths}}/{{p.assists}}</h3>
+                    <h3>LH/D: {{p.last_hits}}/{{p.denies}}</h3>
+                    <h3>Damage to Heroes: {{p.hero_damage}}</h3>
+                    <h3>Damage to Towers: {{p.tower_damage}}</h3>
+                    <h3>Allied Healing: {{p.hero_healing}}</h3>
+                </div>
+            </div>
         </div>
-		  </div>
-		  	</div>
-	</div>
-    {% endfor %} 
-</div> 
-		</div>	
-	</div>
-
-	
-	
-	
-	
-	
-	
-	
-	 
+        {% endfor %}
+    </div>
+</div>
 
 <div class="panel panel-default">
-	<div class="panel-heading">Dire</div>
-		<div class="panel-body">
-		{% for p in game.players[5:] %}
-		<div class="panel panel-default">
-        <div class="panel-heading" style="background-color: {% if loop.index <= 5 %} #252D23; {% else %}  #56211A {% endif %}">
-			<div class="col-md-4 ">{{ p.hero_id }}</div>
-			<div class="col-md-4" align="center">{% if loop.index <= 5 %} Radiant {% else %}  Dire {% endif %}</div>
-			<div class="col-md-4" align="right">{{ p.account_id }}</div>
-        </div>
-        <div class="panel-body game-details">
-			<div class="col-md-3">
-				<div> <img src="{{p.portrait_url}}" width="50%"/> </div>
-				<h3>Items</h3>
+    <div class="panel-heading dire">
+        Dire
+    </div>
+    <div class="panel-body">
+        {% for p in game.players[5:] %}
+        <div class="panel panel-defaut">
+            <div class="panel-heading">
+                <div class="col-md-6 ">{{ p.hero_id }}</div>
+                <div class="col-md-6" align="right">{{ p.account_id }}</div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-3">
+                    <div> <img src="{{p.portrait_url}}" width="50%"/> </div>
+                    <h3>Items</h3>
                     {% for i in range(0, 6) %}
                     <div class="col-md-4">
                         <img src="{{p.item_urls[i]}}" width="50px"/>
                     </div>
                     {% endfor %} 
-               </div>
+                </div>
                 <div class="col-md-3">
-					<h3>Skill Build</h3>
+                    <h3>Skill Build</h3>
                     {% for i in range(0, 5) %}
                     {% for j in range(0, 5) %}
                     <div class="col-md-2 {% if loop.first %} col-md-offset-1 {% endif %}">
-                        {% set ind = j + 5 * i %}
-                        {% if p.abilities[ind] %}
-                        <p class="col-md-12">{{ind}}</p>
-                        <img src="{{p.abilities[j + 5 * i].ability_img_url}}" width="64px"/>
-                        {% else %}
-                        <div width="64px" height="64px"></div>
-                        {% endif %}
+                        {% set ind = j + 5 * i %} {% if 
+                        p.abilities[ind] %} <p class="col-md-12">
+                        {{ind}}</p> <img src="{{p.abilities[j + 5 * 
+                        i].ability_img_url}}" width="64px"/> {% else 
+                        %} <div width="64px" height="64px"></div> {% 
+                        endif %}
                     </div>
                     {% endfor %}
                     {% endfor %}                   
                 </div>
-            <div class="col-md-3" align='left'>
-				<h3>Level: {{p.level}}</h3>
-				<h3>XP/M: {{p.xpm}} </h3>
-				<h3>Gold: {{p.gold}} </h3>
-				<h3>Gold Spent: {{p.gold_spent}}</h3>
-				<h3>Gold/Minute: {{p.gpm}} </h3>
-			</div>
-			<div class="col-md-3">
-				<h3>K/D/A: {{p.kills}}/{{p.deaths}}/{{p.assists}}
-				<h3>LH/D: {{p.last_hits}}/{{p.denies}}</h3>
-				<h3>Damage to Heroes: {{p.hero_damage}}</h3>
-				<h3>Damage to Towers: {{p.tower_damage}}</h3>
-				<h3>Allied Healing: {{p.hero_healing}}</h3>
-			</div>
+                <div class="col-md-3" align='left'>
+                    <h3>Level: {{p.level}}</h3>
+                    <h3>XP/M: {{p.xpm}} </h3>
+                    <h3>Gold: {{p.gold}} </h3>
+                    <h3>Gold Spent: {{p.gold_spent}}</h3>
+                    <h3>Gold/Minute: {{p.gpm}} </h3>
+                </div>
+                <div class="col-md-3">
+                    <h3>K/D/A: {{p.kills}}/{{p.deaths}}/{{p.assists}}</h3>
+                    <h3>LH/D: {{p.last_hits}}/{{p.denies}}</h3>
+                    <h3>Damage to Heroes: {{p.hero_damage}}</h3>
+                    <h3>Damage to Towers: {{p.tower_damage}}</h3>
+                    <h3>Allied Healing: {{p.hero_healing}}</h3>
+                </div>
+            </div>
         </div>
-		  </div>
-		  </div>
-		  </div>
-    {% endfor %} 
-</div> 
-		</div>	
-	</div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
 

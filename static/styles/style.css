@@ -73,11 +73,17 @@ body {
 	font-size: 12pt;
 	vertical-align: top;
 }
+.panel-body .panel .dire {
+	background-color: #56211A;
+}
 .panel-body .panel .panel .radiant{
 	background-color: #252D23;
 	height: 30px;
 	font-size: 12pt;
 	vertical-align: top;
+}
+.panel-body .panel .radiant {
+	background-color: #252D23;
 }
 .panel-body .panel .match{
 	background-color: #868686;
