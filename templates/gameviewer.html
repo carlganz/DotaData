@@ -37,11 +37,11 @@
 		<div class="col-md-6">
 		<div class="panel panel-default" {% if g.radiant_win %}style="border:#4F7B05 5px solid"{% endif %}>
 			<div class="panel-heading radiant">Radiant Team</div>
-			<div class="panel-body">
+			<div class="panel-body" align="center">
 				{% for p in g.players if p.slot < 5 %}
 				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
+					<img src="{{ p.portrait_url }}" width="100%"> <br><br/>
 					<p style="font-size:8pt;" class="player-id">{{ p.account_id }}</p>
-					<img src="{{ p.portrait_url }}" width="100%">
 				</div>
 				{% endfor %}
 			</div>
@@ -51,11 +51,11 @@
 		<div class="col-md-6">
 		<div class="panel panel-default" {% if not g.radiant_win %}style="border:#4F7B05 5px solid"{% endif %}>
 			<div class="panel-heading dire">Dire Team</div>
-			<div class="panel-body">
+			<div class="panel-body" height="50%">
 				{% for p in g.players if p.slot >= 5 %}
 				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
+					<img src="{{ p.portrait_url }}" width="100%"> <br><br/>
 					<p style="font-size:8pt;">{{ p.account_id }}</p>
-					<img src="{{ p.portrait_url }}" width="100%">
 				</div>
 				{% endfor %}
 			</div>
