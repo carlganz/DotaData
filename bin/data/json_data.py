@@ -41,4 +41,3 @@ def GetGMFromID(gmID):
 
 def GetItemFromID(iID):
     return str(item_data[str(iID)]) if str(iID) in item_data else 'UnKnown'
-

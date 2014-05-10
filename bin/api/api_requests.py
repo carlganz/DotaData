@@ -19,124 +19,79 @@ my_api_key = '&key=06F26E71DA72FD03C5A1304C565EAA9E'
 my_steam_id = 53793164
 ni_steam_id = 133942829
 
-class Request:
-    request_type = None
-    
-    acc_id = []
-    ma_id = None
-    
-    num = None
-    start_ma_id = None
-    game_mode = None
-    
-    heroes = []
+class GameRequest:
+  def __init__(self):
+    self.acc_id = []
+    self.start_ma_id = None
+    self.num_req = None
+    self.mode = None
+    self.heroes = []
 
-    def __init__(self, _type):
-        self.request_type = _type
+  def __repr__(self):
+    return self.MakeString()
 
-    def __repr__(self):
-        return str(self.Stringify())
+  def ConstrainByAccountID(self, acc_id):
+    self.acc_id.append(acc_id)
 
-    def ConstrainByAccountID(self, acc_id):
-        self.acc_id.append(acc_id)
+  def StartAtMatchID(self, m_id):
+    self.start_ma_id = m_id
 
-    def AddMatchID(self, m_id):
-        self.ma_id = m_id
+  def SetMatchesRequested(self, ma_req):
+    self.num_req = ma_req
 
-    def StartAtMatchID(self, m_id):
-        self.start_ma_id = m_id
+  def SetGameMode(self, gm):
+    self.mode = gm
 
-    def SetMatchesRequested(self, ma_req):
-        self.num = ma_req
-        
-    def SetGameMode(self, gm):
-    	self.game_mode = gm
-    	
-    def ConstrainByHero(self, hID):
-    	self.heroes.append(hID)
+  def ConstrainByHero(self, hID):
+    self.heroes.append(hID)
 
-    def Stringify (self):
-        req = ''
-        if(self.request_type == None) :
-            return 'No Request Type'
-        if(self.request_type == 1):
-            req += getMatchHistory
-        elif self.request_type == 2:
-            req += getMatchDetails
+  def MakeString (self):
+    r = getMatchHistory
+    for id in self.acc_id:
+      r += str(accID) + str(id)
 
-            
-        for id in self.acc_id:
-            req = req + str(accID) + str(id)
-            
-        if self.ma_id != None:
-            req = req + str(self.ma_id)
-        else :
-            if self.request_type == 2:
-                return 'No Match ID'
-                
-        if self.num != None:
-            req += maReq + str(self.num)
-        if self.start_ma_id != None:
-            req += start + str(self.start_ma_id)
-        if self.game_mode != None:
-        	req += game_mode + str(self.game_mode)
-        	
-        for id in self.heroes:
-        	req += hero + str(id)
+    if self.num_req != None:
+      r += str(maReq) + str(self.num_req)
 
-        return req + my_api_key
-        
-    def MakeRequest (self):
-        if self.request_type == None:
-            return 'err'
-        elif self.request_type == 1:
-            # Will Return an [] of json games
-            games = []
-            n = self.num
-            while True:
-                self.num = n if n < 101 else 100
-                
-                response = urllib2.urlopen(self.Stringify()).read().decode('utf8')
-                for g in json.loads(response)['result']['matches']:
-                    games.append(g)
+    if self.start_ma_id != None:
+      r += str(start) + str(self.start_ma_id)
 
-                
-                if n < 101:
-                    break;
-                else:
-                    self.start_at_match_id = games[-1]['match_id']
-                    n -= 100
-            
-            return games
-        elif self.request_type == 2:
-            response = urllib2.urlopen(self.Stringify()).read().decode('utf8')
-            return json.loads(response)['result']
+    if self.mode != None:
+      r += str(game_mode) + str(self.game_mode)
+
+    for id in self.heroes:
+      r += str(hero) + str(id)
+
+    return r + my_api_key
 
 
-    
-class request_types:
-    matchHistory = 1
-    matchDetails = 2
+  def MakeRequest (self):
+    # Will Return an [] of json games
+    games = []
+    n = self.num_req
+    while True:
+      self.num_req = n if n < 101 else 100
 
-num = 10
-def RequestMyGames():
-    r = Request(1)
-    r.ConstrainByAccountID(my_steam_id)
-    r.SetMatchesRequested(num)
-    gs = r.MakeRequest()
-    return gs
+      response = urllib2.urlopen(self.MakeString()).read().decode('utf8')
+      for g in json.loads(response)['result']['matches']:
+        games.append(g)
 
-def RequestNiGames():
-    r = Request(1)
-    r.ConstrainByAccountID(ni_steam_id)
-    r.SetMatchesRequested(num)
-    gs = r.MakeRequest()
-    return gs
+      if n < 101:
+        break;
+      else:
+        self.start_ma_id = games[-1]['match_id']
+        n -= 100
 
-def RequestGames():
-    r = Request(1)
-    r.SetMatchesRequested(num)
-    gs = r.MakeRequest()
-    return gs
-    
+    return games
 
+
+class DetailRequest:
+  def __init__(self, m_id):
+    self.m_id = m_id
+
+  def __repr__(self):
+    return getMatchDetails + str(self.m_id)
+
+  def MakeRequest(self):
+    response = urllib2.urlopen(getMatchDetails + str(self.m_id)).read().decode('utf8')
+    return json.loads(response)['result']

@@ -47,8 +47,7 @@ def players():
 
 @app.route('/aboutdb')
 def tbd():
-    return render_template('tbd.html', message = 'Details about the database')   
+    return render_template('tbd.html', message = 'Details about the database')
 
 if __name__ == '__main__':
-    #MakeData()
     app.run(debug=True)
