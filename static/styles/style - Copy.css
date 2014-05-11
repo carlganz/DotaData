@@ -1,0 +1,195 @@
+/* ---------------------------------------------------------
+   HTML5 Bones
+   This stylesheet contains print styling and a section for 
+   you to simply add your own. This is a basic template 
+   after all.
+   ---------------------------------------------------------*/
+body {
+	background-color:#000;
+}
+.panel{
+	border-color: #341813;
+	background-color: #AC0000;
+	color: #191819;
+}
+.panel-body{
+	background-color: #191819;
+	color:#A69A75;
+}
+.panel-body .panel{
+	background-color: #191819;
+	border-color:#E3880E;
+	box-shadow: 0 0 30px black;
+}
+.panel-body .panel .panel-heading {
+	background-color: #232426;
+	color: white;
+	height:30px;
+	font-size: 12pt;
+	vertical-align: top;
+}
+/* orange: #F24B14 */
+.panel-body .panel-body{
+	background-color: #191819;
+}
+.panel-body .panel .panel .panel-heading{
+	background-color: #868686;
+	height:30px;
+	font-size: 12pt;
+	vertical-align: top;
+}
+.panel-body .panel .panel .contact-heading{
+	background-color: #868686;
+	height:30px;
+	font-size: 18pt;
+}
+.panel-body .panel .panel .contact-body a{
+	color: #D50000;
+}
+.panel-body .panel .panel .danny{
+	background-color: #000;
+	height: 30px;
+	font-size: 20pt;
+}
+.panel-body .panel .panel .lisa{
+	background-color: #000;
+	height: 30px;
+	font-size: 20pt;
+}
+.btn {
+	background:-webkit-linear-gradient(#282828 50%, #AC0000);
+	background:-o-linear-gradient(#282828 30%, #AC0000);
+	background:-moz-linear-gradient(#282828 30%, #AC0000);
+	background:linear-gradient(#282828 50%, #AC0000);
+	background-color: #341813;
+	border-color: #702D29;
+	color:#FFF; 
+}
+
+/* This button was generated using CSSButtonGenerator.com */
+.panel-body .panel .panel .dire{
+	background-color: #56211A;
+	height: 30px;
+	font-size: 12pt;
+	vertical-align: top;
+}
+.panel-body .panel .dire {
+	background-color: #56211A;
+}
+.panel-body .panel .panel .radiant{
+	background-color: #252D23;
+	height: 30px;
+	font-size: 12pt;
+	vertical-align: top;
+}
+.panel-body .panel .radiant {
+	background-color: #252D23;
+}
+.panel-body .panel .match{
+	background-color: #868686;
+	height: 30px;
+	font-size: 8pt;
+	vertical-align: top;
+}
+.panel-body .panel .match a{
+	font-size: 14pt;
+	color:#000;
+	vertical-align: top;
+}
+.game-stats {
+	height: 50px;
+}
+.panel .panel-body .panel .panel-body .game-details {
+	font-size: 8pt;
+}
+.player-id {
+	font-size: 10pt;
+}
+/* Default link styling #ec5d4c*/
+a:link {
+    color: #000;
+}
+
+a:visited {
+    color: #FFF;
+}
+
+a:hover, a:focus {
+    color: #000;
+}
+
+a:active {
+    color: #000;
+}
+h3 {
+	font-size: 10pt;
+}
+
+
+
+/* ---------------------------------------------------------
+   Author's styles
+   ---------------------------------------------------------*/
+body, html {
+    font-family:Courier;
+}
+
+.page-title {
+	display:inline-block;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	color: #868686;
+	text-shadow: 2px 2px #191819;
+}
+
+
+/* ---------------------------------------------------------
+   Print styles
+   ---------------------------------------------------------*/
+@media print {
+    * {
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        background: transparent !important;
+    }
+
+    html {
+        background-color: #fff;
+    }
+    /* Hide navigation */
+    nav {
+        display: none;
+    }
+
+    /* Show link destinations in brackets after the link text */
+    a[href]:after {
+        content: " (" attr(href) ") ";
+    }
+
+    a[href] {
+        font-weight: bold;
+        text-decoration: underline;
+        color: #06c;
+        border: none;
+    }
+    /* Don't show link destinations for JavaScript or internal links */
+    a[href^="javascript:"]:after, a[href^="#"]:after {
+        content: "";
+    }
+
+    /* Show abbr title value in brackets after the text */
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    figure {
+        margin-bottom: 1em;
+        overflow: hidden;
+    }
+
+        figure img {
+            border: 1px solid #000;
+        }
+}

@@ -8,7 +8,7 @@ to reveal meaningful statistics and patterns.
 
 The flask web-server. Presents results from the database
 
-## db_update_all and db_update_accounts
+## db_update_all.py and db_update_accounts.py
 
 These programs update the database, the latter using the accounts found in
 bin/data/account_ids.json
