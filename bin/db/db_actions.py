@@ -38,4 +38,4 @@ class GameQuery():
 
 # Returns a BaseQuery class
   def GetQuery(self):
-    return self.baseq.paginate(1, 5).items
+    return self.baseq.order_by(GameData.start_time.desc()).all()[:5]

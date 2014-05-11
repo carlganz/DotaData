@@ -5,7 +5,6 @@ from bin.api.api_requests import *
 from bin.data.json_data import *
 
 # Database
-from bin.db.db_update import *
 from bin.db.db_actions import *
 from bin.db.db_pretty import *
 from bin.db.db_schema import GameData, PlayerData, AbilityUpgrades
@@ -50,4 +49,4 @@ def tbd():
     return render_template('tbd.html', message = 'Details about the database')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

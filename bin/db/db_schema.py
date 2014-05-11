@@ -4,14 +4,14 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from bin.api.api_requests import *
 import random
+from pprint import pprint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../db/d2db01.db'
 db = SQLAlchemy(app)
 
 def GetMatchDetails(m_id):
-  r = Request(2)
-  r.AddMatchID(m_id)
+  r = DetailRequest(m_id)
   return r.MakeRequest()
 
 class GameData(db.Model):
@@ -111,11 +111,17 @@ class PlayerData(db.Model):
   def __init__(self, data, game):
     self.match = game
     self.hero_id = data['hero_id']
-    self.account_id = data['account_id']
-    if self.account_id != 4294967295:
-      self.unique_pm_id = int(str(game.match_id) + str(self.account_id))
+
+    if 'account_id' in data:
+      self.account_id = data['account_id']
+      if self.account_id != 4294967295:
+        self.unique_pm_id = int(str(game.match_id) + str(self.account_id))
+      else:
+        self.unique_pm_id = int(str(game.match_id) + str(random.randint(10000, 100000)))
     else:
+      self.account_id = 0
       self.unique_pm_id = int(str(game.match_id) + str(random.randint(10000, 100000)))
+
     self.assists = data['assists']
     self.deaths = data['deaths']
     self.denies = data['denies']

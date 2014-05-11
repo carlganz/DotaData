@@ -92,6 +92,9 @@ class DetailRequest:
   def __repr__(self):
     return getMatchDetails + str(self.m_id)
 
+  def MakeString(self):
+    return getMatchDetails + str(self.m_id) + my_api_key
+
   def MakeRequest(self):
-    response = urllib2.urlopen(getMatchDetails + str(self.m_id)).read().decode('utf8')
+    response = urllib2.urlopen(self.MakeString()).read().decode('utf8')
     return json.loads(response)['result']

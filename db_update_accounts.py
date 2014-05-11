@@ -6,13 +6,15 @@ import json
 
 # Takes an array of Json game data
 def AddGames(games):
+  games_added = 0
+
   for g in games:
     if len(GameData.query.filter(GameData.match_id == g['match_id']).all()) == 0 :
       db.session.add(GameData(g))
-    else:
-      print("Skipping game with id: " + str(g['match_id']))
+      games_added = games_added + 1
+
   db.session.commit()
-  print('Complete')
+  print('Complete, Added ' + str(games_added) + ' Games!')
 
 def GrabGamesForAccID (acc_id):
   req = GameRequest()
@@ -21,7 +23,6 @@ def GrabGamesForAccID (acc_id):
 
   games = req.MakeRequest()
 
-  print(str(len(games)) + ' games to add for id: ' + str(acc_id))
   AddGames(games)
 
 def UpdateAllAccounts ():

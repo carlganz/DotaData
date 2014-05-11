@@ -16,18 +16,19 @@ def GetHeroNameFromID(hID):
     for h in hero_data:
         if hID == h['id']:
             return h['localized_name']
-    return 'UnKnown'
+    return str(hID)
 
 def GetHeroDataNameFromID(hID):
     for h in hero_data:
         if h['id'] == hID:
             return h['name'][14:]
-    return 'UnKnown'
+    return hID
 
 def GetHeroPortraitFromID(hID):
-    for h in hero_data:
-        return 'http://cdn.dota2.com/apps/dota2/images/heroes/' + str(GetHeroDataNameFromID(hID)) + '_lg.png'
-    return 'UnKnown'
+	for h in hero_data:
+		if h['id'] == hID:
+			return 'http://cdn.dota2.com/apps/dota2/images/heroes/' + h['name'][14:] + '_lg.png'
+	return str(hID)
 
 
 def GetSkillFromID(sID):
