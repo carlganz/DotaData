@@ -104,7 +104,9 @@
                 <tr>
                   {% for j in range(0, 26) %}
                     <td>
-                      {% if not loop.first %}
+                      {% if loop.first %}
+                        LVL
+                      {% else %}
                       <div align='center'>
                         {{ j }}
                       </div>
@@ -120,8 +122,8 @@
                       {% if loop.first %}
                         <img src="{{p.abs_images[i]}}"/ width="100%">
                       {% else %}
-                        {% if p.abs_level[j] == i %}
-                          <img src="{{p.abs_images[p.abs_level[j]]}}" width="100%"/>
+                        {% if p.abs_level[j-1] == i %}
+                          <img src="{{p.abs_images[p.abs_level[j-1]]}}" width="100%"/>
                         {% else %}
                           <div width="100%"/>
                         {% endif %}
