@@ -2,69 +2,66 @@
 
 
 {% block body %}
-<div class="panel panel-default">
-	<div class="panel-heading">Filters</div>
-	<div class="panel-body" align="left">
-		<div class="col-md-2">Sort by:</div>
-		<div class="col-md-4">
-			<select class="form-control">
-				<option>Account ID</option>
-				<option>Hero</option>
-				<option>Game Type</option>
-				<option>Lobby Type</option>
-			</select>
+
+<div class="panel panel-default filter-panel">
+	<div class="panel-heading"><h3>Filters</h3></div>
+	<div class="panel-body filter-body">
+
+		<div class="panel panel-default" align="center">
+				<div class="panel-body">
+					<button type="button" class="btn btn-default">Account ID</button>
+					<button type="button" class="btn btn-default">Hero Name</button>
+					<button type="button" class="btn btn-default">Game Type</button>
+				</div>
 		</div>
-		<div class="col-md-4">
-			<input type="text" class="form-control" placeholder="Enter Account ID">
+
+		<div class="panel panel-default" align="center">
+				<div class="panel-body">
+					<p>Filters Coming Soon!</p>
+				</div>
 		</div>
-		<div class="col-md-2">
-			<button class="btn btn-default">Go!</button>
-		</div>
+
 	</div>
 </div>
+
 {% for g in games %}
-<div class="panel panel-default">
-	<div class="panel-heading match">
-		<a href="/details?id={{g.match_id}}">Match {{g.match_id}}</a>		
+<div class="panel panel-default game-panel">
+	<div class="panel-heading game-heading">
+		<a href="/details?id={{g.match_id}}"><h3>Match {{g.match_id}}</h3></a>
 	</div>
-	<div class="panel-body">
-		<div class="panel panel-body game-stats">
-			<p class="col-md-4">Start Time: {{ g.start_time }}</p>
-			<p class="col-md-3">Duration: {{ g.duration }} minutes</p>
-			<p class="col-md-3">Mode: {{ g.game_mode }}</p>
-			<p class="col-md-2">Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>		
-		</div>
-		<div class="col-md-6">
-		<div class="panel panel-default" {% if g.radiant_win %}style="border:#4F7B05 5px solid"{% endif %}>
-			<div class="panel-heading radiant">Radiant Team</div>
-			<div class="panel-body" align="center">
-				{% for p in g.players if p.slot < 5 %}
-				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
-					<img src="{{ p.portrait_url }}" width="100%"> <br><br/>
-					<p style="font-size:8pt;" class="player-id">{{ p.account_id }}</p>
+	<div class="panel-body game-body">
+
+		<div class="col-sm-12">
+			<div class="panel panel-default game-stats">
+				<div class="panel-body">
+					<p class="col-sm-4">Start Time: {{ g.start_time }}</p>
+					<p class="col-sm-3">Duration: {{ "{0:.2f}".format(g.duration / 60) }} minutes</p>
+					<p class="col-sm-3">Mode: {{ g.game_mode }}</p>
+					<p class="col-sm-2">Victor: {% if g.radiant_win %} Radiant {% else %} Dire {% endif %} </p>
 				</div>
-				{% endfor %}
 			</div>
 		</div>
-		</div>
-		
-		<div class="col-md-6">
-		<div class="panel panel-default" {% if not g.radiant_win %}style="border:#4F7B05 5px solid"{% endif %}>
-			<div class="panel-heading dire">Dire Team</div>
-			<div class="panel-body" height="50%">
-				{% for p in g.players if p.slot >= 5 %}
-				<div class="col-md-2 {% if loop.first %}col-md-offset-1{% endif %}">
-					<img src="{{ p.portrait_url }}" width="100%"> <br><br/>
-					<p style="font-size:8pt;">{{ p.account_id }}</p>
+
+		{% for i in range(0, 2) %}
+		<div class="col-sm-6">
+			<div class="panel panel-default team-panel">
+				<div class="panel-heading">
+					{% if loop.first %} Radiant Team {% else %} Dire Team {% endif %}
 				</div>
-				{% endfor %}
+				<div class="panel-body team-body" align="center">
+					{% for p in g.players[5*i:5*(i+1)] %}
+					<div class="col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}">
+						<img src="{{p.portrait_url}}" width="100%"/>
+						<p>{{p.account_id}}</p>
+					</div>
+					{% endfor %}
+				</div>
 			</div>
 		</div>
-		</div>
-		
-	</div>	
+		{% endfor %}
+
+	</div>
 </div>
 {% endfor %}
 
 {% endblock %}
-

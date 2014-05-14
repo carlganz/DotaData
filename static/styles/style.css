@@ -4,43 +4,67 @@
    you to simply add your own. This is a basic template
    after all.
    ---------------------------------------------------------*/
-body {
-	background-color:#000;
+body, html {
+    font-family:monospace;
+    background-color:#0d0d0d;
+    color:#FDFDFD !important;
 }
 
-.panel-body .panel .panel .contact-body a{
-	color: #D50000;
+.panel {
+  background-color:#343434;
+  border-color:#500;
 }
 
-.btn {
-	background:-webkit-linear-gradient(#282828 50%, #AC0000);
-	background:-o-linear-gradient(#282828 30%, #AC0000);
-	background:-moz-linear-gradient(#282828 30%, #AC0000);
-	background:linear-gradient(#282828 50%, #AC0000);
-	background-color: #341813;
-	border-color: #702D29;
-	color:#FFF;
+.panel-heading {
+  background-color:#151515 !important;
+  border-color:#400 !important;
+  color:#F00 !important;
 }
 
-a:visited, a:focus, a:hover, a:active {
-    color: #FFF;
+.skill-table, .skill-table tr, .skill-table tr td {
+  padding:0;
+  margin:0;
+}
+
+p, h1, h2, h3, img {
+  margin:0;
+}
+
+a, a:visited, a:focus, a:hover, a:active {
+    color: #F00;
 }
 
 
 /* ---------------------------------------------------------
    Author's styles
    ---------------------------------------------------------*/
-body, html {
-    font-family:Courier;
-}
 
 .page-title {
-	display:inline-block;
-	text-align:center;
-	margin-left:auto;
-	margin-right:auto;
-	color: #868686;
-	text-shadow: 2px 2px #191819;
+  font-family:Arial;
+  color:#F00;
+}
+
+.game-panel {
+  background-color:#242424;
+}
+
+.game-body {
+  padding:0;
+  padding-top:15px;
+}
+
+.team-panel {
+  padding:0;
+}
+
+.team-body {
+  padding:0;
+  padding-top:15px;
+  padding-bottom:15px;
+}
+
+.team-body div {
+  padding:1px;
 }
 
 .player-body {
@@ -48,38 +72,61 @@ body, html {
 }
 
 .player-details {
-  overflow:hidden;
-  padding-top:15px;
-  padding-bottom:15px;
 }
 
 .player-portrait {
-  padding:1px;
-  padding-left:15px;
+  padding:15px;
+}
+
+.player-portrait-sm {
+  padding:0;
+  margin:0;
+  width:100%;
+}
+
+#group-portrait {
+  width:10%;
+}
+
+.group-table tr td, .group-table tr {
+  padding:0;
 }
 
 .player-portrait img {
-  padding:0;
-  width:100%;
-  height:100%;
+  padding:1px;
 }
 
-.player-table {
-  margin-bottom:0;
+.player-stats {
+  padding:15px;
 }
 
 .player-items {
+  padding:0;
+  padding-top:15px;
+  padding-right:15px;
 }
 
-.player-items div {
+.player-items img {
+  padding:1px;
+}
+
+.item-img-sm {
+  width:100%;
+  height:50%;
   padding:1px;
 }
 
 .player-skills {
+  padding-top:15px;
+  padding-bottom:15px;
 }
 
-.player-skills div {
+.player-skills img, .player-skills div {
   padding:1px;
+}
+
+.skill-img-box {
+  padding:0;
 }
 
 

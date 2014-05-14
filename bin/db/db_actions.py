@@ -10,13 +10,13 @@ def ResetTable():
     db.create_all()
 
 def TestQuery():
-    q = GameQuery(1)
+    q = GameQuery()
+    q.FilterByPlayerID(my_steam_id)
     return q.GetQuery()
 
 class GameQuery():
-  def __init__(self, page):
+  def __init__(self):
     self.baseq = GameData.query
-    self.page = page
 
   def FilterByMode(self, mode):
     self.baseq = self.baseq.filter(GameData.game_mode == mode)

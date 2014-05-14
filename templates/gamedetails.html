@@ -1,18 +1,25 @@
 {% extends 'layout_template.html' %}
 
+{% block js %}<script src="{{url_for('static',filename='js/collapse.js')}}"></script>{% endblock %}
+
 {% block body %}
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    Game Details {{game.match_id}}
+<div class="panel panel-default overview-panel">
+  <div class="panel-heading overview-heading">
+    <h3>Details for Match: {{game.match_id}}</h3>
   </div>
-  <div class="panel-body">
-    <div class="col-md-12">
-      <p class="col-md-3">{{ game.start_time }}</p>
-      <p class="col-md-3">Duration: {{ game.duration / 60 }} minutes</p>
-      <p class="col-md-3">Mode: {{ game.game_mode }}</p>
-      <p class="col-md-3">Victor: {% if game.radiant_win %} Radiant {% else %} Dire {% endif %} </p>
-    </div>
+  <div class="panel-body overview-body" align="center">
+      <p class="col-sm-3">{{ game.start_time }}</p>
+      <p class="col-sm-3">Duration: {{ "{0:.2f}".format(game.duration / 60) }} minutes</p>
+      <p class="col-sm-3">Mode: {{ game.game_mode }}</p>
+      <p class="col-sm-3">{% if game.radiant_win %} Radiant {% else %} Dire {% endif %} Victory!</p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body" align="center">
+    <button type="button" class="btn btn-default" id="individual">Individual</button>
+    <button type="button" class="btn btn-default" id="grouped">Grouped</button>
   </div>
 </div>
 
@@ -20,88 +27,227 @@
 
 <div class="panel panel-default team-panel">
   <div class="panel-heading team-heading">
-    {% if loop.first %} Radiant {% else %} Dire {% endif %}
+    <h3>
+        {% if loop.first %} Radiant {% else %} Dire {% endif %}
+    </h3>
   </div>
-  <div class="panel-body team-body">
-    {% for p in game.players[5*i:5*(i+1)] %}
 
-    <div class="panel panel-default player-panel">
-      <div class="panel-heading player-heading">
-        <div class="panel-title">
-          <h1 class="panel-title">{{ p.hero_id }}</h1>
-        </div>
-      </div>
-      <div class="panel-body player-body">
-        <div class="player-details">
-          <div class="player-portrait col-md-3">
-            <img src="{{p.portrait_url}}"/>
+  <div id="team{{i}}" class="panel-collapse collapse-{{i}} in">
+    <div class="panel-body team-body-detail {{i}}-detail">
+
+      <div class="team-{{i}}-ind">
+        {% for p in game.players[5*i:5*(i+1)] %}
+        <div class="panel panel-default player-panel">
+          <div class="panel-heading player-heading">
+            <h1 class="panel-title">
+              {{ p.hero_id }} - {{ p.account_id}}
+            </h1>
           </div>
-          <div class="player-items col-md-4">
-            {% for i in range(0, 6) %}
-            <div class="col-md-4">
-              {% if p.item_urls[i] %}
-              <img src="{{p.item_urls[i]}}" width="100%"/>
-              {% else %}
-              <img src="http://placehold.it/110x83" width="100%">
-              {% endif %}
-            </div>
-            {% endfor %}
-          </div>
-          <div class="player-skills col-md-5">
-            <table>
-              {% for i in range (0, 5) %}
-              <tr>
-                {% for j in range (0, 5) %}
-                <td>
-                  {% if p.abilities[j + 5 * i] %}
-                    <img src="{{p.abilities[j + 5 * i].ability_img_url}}"/>
+
+          <div class="panel-body player-body">
+
+            <div class="player-upper">
+              <img class="col-sm-3 player-portrait" src="{{p.portrait_url}}"/>
+
+              <div class="player-stats table-responsive col-sm-6">
+                <table class="table table-condensed table-bordered player-table">
+                  <tr>
+                    <th>Level</th>
+                    <th>XP/M</th>
+                    <th>Gold</th>
+                    <th>Gold Spent</th>
+                    <th>G/M</th>
+
+                  </tr>
+                  <tr>
+                    <td>{{p.level}}</td>
+                    <td>{{p.xpm}}</td>
+                    <td>{{p.gold}}</td>
+                    <td>{{p.gold_spent}}</td>
+                    <td>{{p.gpm}}</td>
+
+                  </tr>
+                  <tr>
+                    <th>K/D/A</th>
+                    <th>LH/D</th>
+                    <th>Hero Damage</th>
+                    <th>Hero Healing</th>
+                    <th>Tower Damage</th>
+                  </tr>
+
+                  <tr>
+                    <td>{{p.kills}}/{{p.deaths}}/{{p.assists}}</td>
+                    <td>{{p.last_hits}} / {{p.denies}}</td>
+                    <td>{{p.hero_damage}}</td>
+                    <td>{{p.hero_healing}}</td>
+                    <td>{{p.tower_damage}}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="player-items col-sm-3">
+                {% for i in range(0, 6) %}
+                  {% if p.item_urls[i] %}
+                  <img class="col-sm-4" src="{{p.item_urls[i]}}"/>
                   {% else %}
-                    <img src="http://placehold.it/70x70"/>
+                  <img class="col-sm-4" src="http://placehold.it/85x64">
                   {% endif %}
-                </td>
                 {% endfor %}
-              </tr>
-              {% endfor %}
-            </table>
+              </div>
+
+            </div>
+
+
+            {% set img_s = 100.0 / 26.0 %}
+            <div class="player-skills col-sm-12">
+              <table class="skill-table table-bordered">
+                <tr>
+                  {% for j in range(0, 26) %}
+                    <td>
+                      {% if not loop.first %}
+                      <div align='center'>
+                        {{ j }}
+                      </div>
+                      {% endif %}
+                    </td>
+                  {% endfor %}
+                </tr>
+
+                {% for i in range(0, 5) %}
+                  <tr>
+                    {% for j in range(0, 26) %}
+                      <td width="{{img_s}}%" class="skill-img-box">
+                      {% if loop.first %}
+                        <img src="{{p.abs_images[i]}}"/ width="100%">
+                      {% else %}
+                        {% if p.abs_level[j] == i %}
+                          <img src="{{p.abs_images[p.abs_level[j]]}}" width="100%"/>
+                        {% else %}
+                          <div width="100%"/>
+                        {% endif %}
+                      {% endif %}
+                      </td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+
+
           </div>
         </div>
-
-        <div class="player-stats table-responsive">
-          <table class="table table-condensed table-bordered player-table">
-            <tr>
-              <th>Level</th>
-              <th>XP/M</th>
-              <th>Gold</th>
-              <th>Gold Spent</th>
-              <th>G/M</th>
-              <th>K/D/A</th>
-              <th>LH/D</th>
-              <th>Hero Damage</th>
-              <th>Hero Healing</th>
-              <th>Tower Damage</th>
-            </tr>
-            <tr>
-              <td>{{p.level}}</td>
-              <td>{{p.xpm}}</td>
-              <td>{{p.gold}}</td>
-              <td>{{p.gold_spent}}</td>
-              <td>{{p.gpm}}</td>
-              <td>{{p.kills}}/{{p.deaths}}/{{p.assists}}</td>
-              <td>{{p.last_hits}} / {{p.denies}}</td>
-              <td>{{p.hero_damage}}</td>
-              <td>{{p.hero_healing}}</td>
-              <td>{{p.tower_damage}}</td>
-            </tr>
-          </table>
-        </div>
-
+        {% endfor %}
       </div>
     </div>
-
-    {% endfor %}
   </div>
 </div>
 
 {% endfor %}
+
+
+<div class="radiant-team-stats" hidden>
+  <div class="group-stats table-responsive col-sm-12">
+    <table class="table table-condensed table-bordered group-table">
+      <tr>
+        <th>Account</th>
+        <th>Hero</th>
+        <th>Level</th>
+        <th>XP/M</th>
+        <th>Gold</th>
+        <th>Gold Spent</th>
+        <th>G/M</th>
+        <th>K/D/A</th>
+        <th>LH/D</th>
+        <th colspan="3" width="15%">Items</th>
+        <th>Hero Damage</th>
+        <th>Hero Healing</th>
+        <th>Tower Damage</th>
+      </tr>
+      {% for p in game.players[:5] %}
+      <tr>
+        <td>{{p.account_id}}</td>
+        <td id="group-portrait"><img class="player-portrait-sm" src="{{p.portrait_url}}"/></td>
+        <td>{{p.level}}</td>
+        <td>{{p.xpm}}</td>
+        <td>{{p.gold}}</td>
+        <td>{{p.gold_spent}}</td>
+        <td>{{p.gpm}}</td>
+        <td>{{p.kills}}/{{p.deaths}}/{{p.assists}}</td>
+        <td>{{p.last_hits}} / {{p.denies}}</td>
+
+        <td width="5%">
+          <img class="item-img-sm" src="{{p.item_urls[0]}}"/>
+          <img class="item-img-sm" src="{{p.item_urls[3]}}"/>
+        </td>
+        <td width="5%">
+          <img class="item-img-sm" src="{{p.item_urls[1]}}"/>
+          <img class="item-img-sm" src="{{p.item_urls[4]}}"/>
+        </td>
+        <td width="5%">
+          <img class="item-img-sm" src="{{p.item_urls[2]}}"/>
+          <img class="item-img-sm" src="{{p.item_urls[5]}}"/>
+        </td>
+
+        <td>{{p.hero_damage}}</td>
+        <td>{{p.hero_healing}}</td>
+        <td>{{p.tower_damage}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<div class="dire-team-stats" hidden>
+  <div class="group-stats table-responsive col-sm-12">
+    <table class="table table-condensed table-bordered group-table">
+      <tr>
+        <th>Account</th>
+        <th>Hero</th>
+        <th>Level</th>
+        <th>XP/M</th>
+        <th>Gold</th>
+        <th>Gold Spent</th>
+        <th>G/M</th>
+        <th>K/D/A</th>
+        <th>LH/D</th>
+        <th colspan="3" width="15%">Items</th>
+        <th>Hero Damage</th>
+        <th>Hero Healing</th>
+        <th>Tower Damage</th>
+      </tr>
+      {% for p in game.players[5:] %}
+      <tr>
+        <td>{{p.account_id}}</td>
+        <td id="group-portrait"><img class="player-portrait-sm" src="{{p.portrait_url}}"/></td>
+        <td>{{p.level}}</td>
+        <td>{{p.xpm}}</td>
+        <td>{{p.gold}}</td>
+        <td>{{p.gold_spent}}</td>
+        <td>{{p.gpm}}</td>
+        <td>{{p.kills}}/{{p.deaths}}/{{p.assists}}</td>
+        <td>{{p.last_hits}} / {{p.denies}}</td>
+
+        <td width="5%">
+          <img class="item-img-sm" src="{{p.item_urls[0]}}"/>
+          <img class="item-img-sm" src="{{p.item_urls[3]}}"/>
+        </td>
+        <td width="5%">
+          <img class="item-img-sm" src="{{p.item_urls[1]}}"/>
+          <img class="item-img-sm" src="{{p.item_urls[4]}}"/>
+        </td>
+        <td width="5%">
+          <img class="item-img-sm" src="{{p.item_urls[2]}}"/>
+          <img class="item-img-sm" src="{{p.item_urls[5]}}"/>
+        </td>
+
+        <td>{{p.hero_damage}}</td>
+        <td>{{p.hero_healing}}</td>
+        <td>{{p.tower_damage}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
 
 {% endblock %}

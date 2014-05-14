@@ -1,3 +1,4 @@
 db/*.db
 *.pyc
 .venv/
+.DS_Store

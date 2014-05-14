@@ -1,60 +1,66 @@
 {# Jinja2 Required Arguments #}
 {#
-	Python Object bssep
-	
+
 #}
 <!DOCTYPE html>
 <html lang="en">
 <!-- Set this to the main language of your site -->
 <head>
-    <!-- Universal -->
-    <meta charset="utf-8">
-        
-    <!-- Define a viewport to mobile devices to use - telling the browser to assume that the page is as wide as the device (width=device-width) and setting the initial page zoom level to be 1 (initial-scale=1.0) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Universal -->
+	<meta charset="utf-8">
 
-    <!-- JQuery -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<!-- Define a viewport to mobile devices to use - telling the browser to assume that the page is as wide as the device (width=device-width) and setting the initial page zoom level to be 1 (initial-scale=1.0) -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <!-- Include the site stylesheet -->
+	<!-- JQuery -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+	<!-- Bootstrap -->
+	<!-- Latest compiled and minified CSS -->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<!-- Include the site stylesheet -->
 	<link href="{{ url_for('static', filename='styles/style.css')}}" rel="stylesheet">
-	
-    {% block js %}{% endblock %}
 
-    <!---------------------------------------------------------------->
-    <!--------------------------------------------------------------------->
+	{% block js %}{% endblock %}
 
-    <title>{% block title %}Template Title{% endblock %}</title>
+	<!---------------------------------------------------------------->
+	<!--------------------------------------------------------------------->
 
-    <!-- Enter a brief description of your page -->
-    <meta name="description" content="Flask Layout Template -- djmorrsee.com">
+	<title>{% block title %}Template Title{% endblock %}</title>
+
+	<!-- Enter a brief description of your page -->
+	<meta name="description" content="Dota Data">
 </head>
 <body>
-    <div class="col-md-10 col-md-offset-1 fullHeight">
-        <div class="bodyMain">
-			<div class="nav-bar panel panel-default" align="center">
+
+	<div class="col-sm-8 col-sm-offset-2 main-body">
+
+		<div class="panel panel-default" align="center">
+
+			<div class="panel-heading page-heading">
 				<a href="/"><h1 class="page-title">DotaData</h1></a>
-				<div class="panel-body" align="center">
-					<div class="col-md-1"></div>
-					<a class="col-md-2 btn btn-default" href="/">Home</a>
-					<a class="col-md-2 btn btn-default" href="/games">Games</a>
-					<a class="col-md-2 btn btn-default" href="/players">Players</a>
-					<a class="col-md-2 btn btn-default" href="/stats">Stats</a>
-					<a class="col-md-2 btn btn-default" href="/about">About Us</a>
-				</div>
-			</div>			
-			<div class="panel panel-default">
-				<div class="panel-body">
-		        {% block body %}
-		        {% endblock %}
-		        </div>
-	        </div>
-        </div>
-    </div>       
+			</div>
+
+			<div class="panel-body page-nav" align="center">
+				<a class="col-sm-2 col-sm-offset-1 btn btn-default" href="/">Home</a>
+				<a class="col-sm-2 btn btn-default" href="/games">Games</a>
+				<a class="col-sm-2 btn btn-default" href="/players">Players</a>
+				<a class="col-sm-2 btn btn-default" href="/stats">Stats</a>
+				<a class="col-sm-2 btn btn-default" href="/about">About Us</a>
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				{% block body %}
+				{% endblock %}
+			</div>
+		</div>
+
+	</div>
+
 </body>
 </html>

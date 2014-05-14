@@ -30,7 +30,7 @@ class PrettyPlayer:
   def __init__(self, player):
     self.hero_id = GetHeroNameFromID(player.hero_id)
     self.portrait_url = GetHeroPortraitFromID(player.hero_id)
-    self.account_id = LookupAccountID(player.account_id) if player.account_id != 4294967295 else 'Private Account'
+    self.account_id = LookupAccountID(player.account_id) if player.account_id != 4294967295 else 'Private'
     self.assists = player.assists
     self.deaths = player.deaths
     self.denies = player.denies
@@ -60,14 +60,30 @@ class PrettyPlayer:
     self.slot = player.slot
     self.tower_damage = player.tower_damage
     self.xpm = player.xpm
-    self.abilities = list(PrettyAbility(a) for a in player.abilities)
+
+    self.abs = []
+    self.abs_level = []
+    self.abs_images = []
+
+    for a in player.abilities:
+      if a.ability not in self.abs:
+        self.abs.append(a.ability)
+      self.abs_level.append(self.abs.index(a.ability))
+
+    for a in self.abs:
+      s_name = GetSkillFromID(a)
+      if s_name == 'stats':
+        self.abs_images.append('https://raw.githubusercontent.com/kronusme/dota2-api/master/images/stats.png')
+      else:
+        self.abs_images.append('http://cdn-01-origin.steampowered.com/apps/dota2/images/abilities/' + str(s_name) + '_lg.png')
 
 class PrettyAbility:
   def __init__(self, ability):
+    self.id = ability.ability
     self.ability = GetSkillFromID(ability.ability)
     if self.ability == 'stats':
       self.ability_img_url = 'https://raw.githubusercontent.com/kronusme/dota2-api/master/images/stats.png'
     else:
-      self.ability_img_url = 'http://cdn-01-origin.steampowered.com/apps/dota2/images/abilities/' + str(self.ability) + '_md.png'
+      self.ability_img_url = 'http://cdn-01-origin.steampowered.com/apps/dota2/images/abilities/' + str(self.ability) + '_lg.png'
     self.level = ability.level
     self.time = ability.time
