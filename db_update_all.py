@@ -1,28 +1,22 @@
 from bin.db.db_schema import *
 from bin.api.api_requests import *
+from bin.db.db_actions import *
 
 # This program queries the Dota API for the last 500 games and stores the data.
-
-# Takes an array of Json game data
-def AddGames(games):
-  games_added = 0
-
-  for g in games:
-    if len(GameData.query.filter(GameData.match_id == g['match_id']).all()) == 0 :
-      db.session.add(GameData(g))
-      games_added = games_added + 1
-
-  db.session.commit()
-  print('Complete, Added ' + str(games_added) + ' Games!')
-
-
 def GrabAllGames ():
+  GrabGamesForSkillLevel(1)
+  GrabGamesForSkillLevel(2)
+  GrabGamesForSkillLevel(3)
+
+
+def GrabGamesForSkillLevel (l):
   req = GameRequest()
-  req.SetMatchesRequested(500)
+  req.SetMatchesRequested(100)
+  req.SetSkillLevel(l)
 
   games = req.MakeRequest()
+  print(len(games))
+  AddGames(games, l)
 
-  AddGames(games)
-
-
+ResetTable()
 GrabAllGames()

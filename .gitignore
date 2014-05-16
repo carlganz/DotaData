@@ -1,4 +1,6 @@
 db/*.db
+R/
 *.pyc
 .venv/
 .DS_Store
+.Rapp.history

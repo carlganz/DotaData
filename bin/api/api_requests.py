@@ -2,7 +2,7 @@ import urllib2, json
 from pprint import pprint
 
 # API URL's #
-getMatchHistory = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?'
+getMatchHistory = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?&min_players=10'
 getMatchDetails = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?&match_id='
 
 # String Constants #
@@ -12,6 +12,7 @@ start = '&start_at_match_id='
 date = '&date_min='
 game_mode = '&game_mode='
 hero = '&hero_id='
+skill = '&skill='
 
 # Vars #
 my_api_key = '&key=06F26E71DA72FD03C5A1304C565EAA9E'
@@ -25,6 +26,7 @@ class GameRequest:
     self.start_ma_id = None
     self.num_req = None
     self.mode = None
+    self.skill = None
     self.heroes = []
 
   def __repr__(self):
@@ -42,6 +44,9 @@ class GameRequest:
   def SetGameMode(self, gm):
     self.mode = gm
 
+  def SetSkillLevel(self, sr):
+    self.skill = sr
+
   def ConstrainByHero(self, hID):
     self.heroes.append(hID)
 
@@ -58,6 +63,9 @@ class GameRequest:
 
     if self.mode != None:
       r += str(game_mode) + str(self.game_mode)
+
+    if self.skill != None:
+      r += str(skill) + str(self.skill)
 
     for id in self.heroes:
       r += str(hero) + str(id)

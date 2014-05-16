@@ -19,6 +19,8 @@ class GameData(db.Model):
   match_id = db.Column(db.Integer, unique = True)
   match_seq= db.Column(db.Integer, unique = True)
 
+  skill_rating = db.Column(db.Integer)
+
   start_time = db.Column(db.Integer)
   duration = db.Column(db.Integer)
 
@@ -42,10 +44,11 @@ class GameData(db.Model):
   pos_votes = db.Column(db.Integer)
   neg_votes = db.Column(db.Integer)
 
-  def __init__(self, jres):
+  def __init__(self, jres, sr = 0):
     jres = GetMatchDetails(jres['match_id'])
     self.match_id = jres['match_id']
     self.match_seq = jres['match_seq_num']
+    self.skill_rating = sr
     self.start_time = jres['start_time']
     self.duration = jres['duration']
     self.lobby_type = jres['lobby_type']
@@ -64,7 +67,6 @@ class GameData(db.Model):
 
     for player in jres['players']:
         db.session.add(PlayerData(player, self))
-    db.session.commit()
 
     return
 

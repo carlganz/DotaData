@@ -1,9 +1,10 @@
 from bin.db.db_schema import *
 from bin.data.json_data import *
+from bin.db.db_trash_collector import *
 from collections import Counter
 import json
 
-# This file contains definitions for database cleaning and querying
+# This file contains definitions for database cleaning, adding and querying
 
 def ResetTable():
     db.drop_all()
@@ -11,7 +12,6 @@ def ResetTable():
 
 def TestQuery():
     q = GameQuery()
-    q.FilterByPlayerID(my_steam_id)
     return q.GetQuery()
 
 class GameQuery():
@@ -39,3 +39,26 @@ class GameQuery():
 # Returns a BaseQuery class
   def GetQuery(self):
     return self.baseq.order_by(GameData.start_time.desc()).all()[:5]
+
+# Takes an array of Json game data
+def AddGames(games, sr = 0):
+  games_added = 0
+  trashed_games = 0
+  for g in games:
+    m_id = g['match_id']
+
+    if len(GameData.query.filter(GameData.match_id == m_id).all()) == 0 :
+      dg = GameData(g, sr)
+
+      if IsTrash(dg):
+        print('Match Trashed: ' + str(m_id))
+        trashed_games = trashed_games + 1
+        db.session.rollback()
+      else:
+
+        print('Match Added: ' + str(m_id))
+        db.session.add(dg)
+        db.session.commit()
+        games_added = games_added + 1
+
+  print('Complete, Added ' + str(games_added) + ', Trashed ' + str(trashed_games) + ' Games!')

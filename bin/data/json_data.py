@@ -9,20 +9,21 @@ gm_data = json.load(open('bin/data/my_modes.json'))
 item_data = json.load(open('bin/data/my_items.json'))
 account_ids = json.load(open('bin/data/account_ids.json'))
 
+
 def LookupAccountID(aID):
 	return str(account_ids[str(aID)]) if str(aID) in account_ids else aID
 
 def GetHeroNameFromID(hID):
-    for h in hero_data:
-        if hID == h['id']:
-            return h['localized_name']
-    return str(hID)
+  for h in hero_data:
+    if hID == h['id']:
+      return h['localized_name']
+  return str(hID)
 
 def GetHeroDataNameFromID(hID):
-    for h in hero_data:
-        if h['id'] == hID:
-            return h['name'][14:]
-    return hID
+  for h in hero_data:
+    if h['id'] == hID:
+      return h['name'][14:]
+  return hID
 
 def GetHeroPortraitFromID(hID):
 	for h in hero_data:
@@ -32,13 +33,13 @@ def GetHeroPortraitFromID(hID):
 
 
 def GetSkillFromID(sID):
-    return str(skill_data[str(sID)]) if str(sID) in skill_data else 'UnKnown'
+  return str(skill_data[str(sID)]) if str(sID) in skill_data else 'UnKnown'
 
 def GetLobbyFromID(lID):
-    return str(lobby_data[str(lID)]) if str(lID) in lobby_data else 'UnKnown'
+  return str(lobby_data[str(lID)]) if str(lID) in lobby_data else 'UnKnown'
 
 def GetGMFromID(gmID):
-    return str(gm_data[str(gmID)]) if str(gmID) in gm_data else 'UnKnown'
+  return str(gm_data[str(gmID)]) if str(gmID) in gm_data else 'UnKnown'
 
 def GetItemFromID(iID):
-    return str(item_data[str(iID)]) if str(iID) in item_data else 'UnKnown'
+  return str(item_data[str(iID)]) if str(iID) in item_data else 'UnKnown'
