@@ -18,10 +18,23 @@ Examples of Observations
 >- Total K/D/A
 >- Total LH/D
 
+## Team Dependent Tests (??)
 
-## Team Tests
+These tests are game wide, meaning one result per game. The results for one
+team depend on the other team in the game, and will oppose those results.
 
-These tests are team wide, meaning each game has two results.
+This can be considered game wide:
+
+Hypotheses will take the form:
+
+>- Team has more last_hits
+>- Team has more gold spent
+>- Team has more healing
+
+## Team Independent Tests
+
+These tests are team wide, meaning each game has two results. The results from
+one team does not depend on the other.
 
 ### Radiant Vs Dire
 

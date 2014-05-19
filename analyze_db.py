@@ -1,5 +1,7 @@
+from __future__ import division
 from bin.db.db_schema import *
 from bin.db.db_actions import *
+from bin.db.db_observations import *
 from bin.data.json_data import _hero_data
 import csv
 import os
@@ -116,4 +118,5 @@ def TestAllPentas (games):
 
 games = GameData.query.all()
 
-TestAllHeroes()
+ratio = TotalTimesRadiantWins(games) / len(games)
+print(ratio)
