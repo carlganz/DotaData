@@ -2,7 +2,9 @@ from bin.db.db_schema import *
 from bin.db.db_actions import *
 from bin.data.json_data import _hero_data
 import csv
+import os
 
+# The one function to rule them all
 def LinearRegression (test_name, test_f, games, *test_args):
 
   test_array = []
@@ -22,17 +24,24 @@ def LinearRegression (test_name, test_f, games, *test_args):
       x = x + 1
 
   if not x == 0:
-    with open('tests/' + str(test_name) + '.csv', 'w') as csvfile:
+    filename = 'tests/' + str(test_name) + '.csv'
+    if not os.path.exists(os.path.dirname(filename)):
+      os.makedirs(os.path.dirname(filename))
+
+    with open(filename, 'w') as csvfile:
       sw = csv.writer(csvfile, delimiter=',')
       sw.writerow(['hyp', 'win', x])
 
       for i in range(0, len(wins)):
         sw.writerow([test_array[i], wins[i]])
 
+## Team Tests
+# Tests if hero is on team
 def HeroIDTest (players, hID):
   ids = list(p.hero_id for p in players)
   return hID in ids
 
+# Tests if all heroes are on team
 def MultiHeroIDTest (players, h_ids):
   ids = list(p.hero_id for p in players)
 
@@ -41,6 +50,20 @@ def MultiHeroIDTest (players, h_ids):
       return False
   return True
 
+# Tests if the item appears greater than or num number of times on a team
+def ItemTest (players, i_id, num = 1):
+  count = 0
+  for p in players:
+    if i_id == p.item0: count = count + 1
+    if i_id == p.item1: count = count + 1
+    if i_id == p.item2: count = count + 1
+    if i_id == p.item3: count = count + 1
+    if i_id == p.item4: count = count + 1
+    if i_id == p.item5: count = count + 1
+
+  return count >= num
+
+## Test Sweeps
 def TestAllHeroes (games):
   for h in _hero_data:
     test_name = 'hero/single/' + _hero_data[str(h)]['localized_name']
@@ -93,8 +116,4 @@ def TestAllPentas (games):
 
 games = GameData.query.all()
 
-TestAllHeroes(games)
-TestAllPairs(games)
-TestAllTrips(games)
-TestAllQuads(games)
-TestAllPentas(games)
+LinearRegression('item/test', ItemTest, games, 36, 5)
