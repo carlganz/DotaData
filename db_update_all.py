@@ -11,12 +11,12 @@ def GrabAllGames ():
 
 def GrabGamesForSkillLevel (l):
   req = GameRequest()
-  req.SetMatchesRequested(100)
+  req.SetMatchesRequested(500)
   req.SetSkillLevel(l)
 
   games = req.MakeRequest()
   print(len(games))
   AddGames(games, l)
 
-ResetTable()
+
 GrabAllGames()

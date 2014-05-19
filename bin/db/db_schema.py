@@ -73,6 +73,12 @@ class GameData(db.Model):
   def __repr__(self):
     return 'Match ID: ' + str(self.match_id)
 
+  def GetRadiantTeam(self):
+    return self.players[:5]
+
+  def GetDireTeam(self):
+    return self.players[5:]
+
 class PlayerData(db.Model):
   _id = db.Column(db.Integer, primary_key = True, unique = True)
   match = db.relationship('GameData', backref = db.backref('players', lazy = 'dynamic'))

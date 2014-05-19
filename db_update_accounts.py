@@ -19,5 +19,4 @@ def UpdateAllAccounts ():
   for a in accounts:
     GrabGamesForAccID(a)
 
-ResetTable()
 UpdateAllAccounts()

@@ -37,8 +37,13 @@ class GameQuery():
     self.baseq = self.baseq.filter(GameData.players.any(item0 = iID)).union(self.baseq.filter(GameData.players.any(item1=iID)))
 
 # Returns a BaseQuery class
-  def GetQuery(self):
-    return self.baseq.order_by(GameData.start_time.desc()).all()[:5]
+  def QuerySize(self):
+    return self.baseq.count()
+
+  def GetQuery(self, page=1):
+    return self.baseq.paginate(int(page), 5).items
+
+
 
 # Takes an array of Json game data
 def AddGames(games, sr = 0):
@@ -51,12 +56,9 @@ def AddGames(games, sr = 0):
       dg = GameData(g, sr)
 
       if IsTrash(dg):
-        print('Match Trashed: ' + str(m_id))
         trashed_games = trashed_games + 1
         db.session.rollback()
       else:
-
-        print('Match Added: ' + str(m_id))
         db.session.add(dg)
         db.session.commit()
         games_added = games_added + 1

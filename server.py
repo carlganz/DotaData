@@ -9,6 +9,10 @@ from bin.db.db_actions import *
 from bin.db.db_pretty import *
 from bin.db.db_schema import GameData, PlayerData, AbilityUpgrades
 
+# Utility
+from bin.util.filters import *
+
+# Setup App Server
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/d2db01.db'
 db = SQLAlchemy(app)
@@ -19,21 +23,21 @@ def home():
 
 @app.route('/games')
 def games():
-    games = []
-    for g in TestQuery():
-        games.append(PrettyGame(g))
-    return render_template('gameviewer.html', games=games)
+  args = request.args
+  games = GamesFromArgs(args)
+
+  pretty_games = list(PrettyGame(g) for g in games)
+
+  return render_template('gameviewer.html', games=pretty_games, portraits = GetAllPortraits())
 
 @app.route('/details')
 def details():
-    id = request.args.get('id')
-    game = PrettyGame(GameData.query.filter(GameData.match_id == id).first())
+    m_id = request.args.get('id')
+    game = PrettyGame(GameData.query.filter(GameData.match_id == m_id).first())
     return render_template('gamedetails.html', game = game)
-
 
 @app.route('/stats')
 def stats():
-    p = GetUniquePlayers()
     return render_template('stats.html')
 
 @app.route('/about')
@@ -49,4 +53,4 @@ def tbd():
     return render_template('tbd.html', message = 'Details about the database')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+  app.run(debug=True, host='0.0.0.0')

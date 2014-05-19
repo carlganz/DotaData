@@ -26,9 +26,9 @@
 {% for i in range(0,2) %}
 
 <div class="panel panel-default team-panel">
-  <div class="panel-heading team-heading">
+  <div class="panel-heading team-heading" align="center">
     <h3>
-        {% if loop.first %} Radiant {% else %} Dire {% endif %}
+        {% if loop.first %} Radiant {% else %} Dire {% endif %} Team
     </h3>
   </div>
 
@@ -104,13 +104,13 @@
                 <tr>
                   {% for j in range(0, 26) %}
                     <td>
+                      <div align='center'>
                       {% if loop.first %}
                         LVL
                       {% else %}
-                      <div align='center'>
                         {{ j }}
-                      </div>
                       {% endif %}
+                      </div>
                     </td>
                   {% endfor %}
                 </tr>

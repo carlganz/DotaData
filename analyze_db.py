@@ -1,42 +1,100 @@
 from bin.db.db_schema import *
 from bin.db.db_actions import *
+from bin.data.json_data import _hero_data
 import csv
 
-def HeroWinrate (h_id, games):
+def LinearRegression (test_name, test_f, games, *test_args):
 
-  in_games = []
+  test_array = []
   wins = []
-
-  slot = None
-
   for g in games:
-    for i in range(0, 2):
-      _in = False
-      for p in g.players[i*5:5*(i+1)]:
-        if p.hero_id == h_id:
-          _in = True;
-          slot = p.slot
+    res = int (test_f(g.GetRadiantTeam(), *test_args))
+    test_array.append(res)
+    wins.append((int)(g.radiant_win == True))
 
-      if _in:
-        in_games.append(1)
+    res = int (test_f(g.GetDireTeam(), *test_args))
+    test_array.append(res)
+    wins.append((int)(g.radiant_win == False))
 
-      else:
-        in_games.append(0)
+  x = 0
+  for i in test_array:
+    if i == 1:
+      x = x + 1
 
-      if  i == 0:
-        wins.append(int(g.radiant_win))
-      else:
-        wins.append(int(not g.radiant_win))
+  if not x == 0:
+    with open('tests/' + str(test_name) + '.csv', 'w') as csvfile:
+      sw = csv.writer(csvfile, delimiter=',')
+      sw.writerow(['hyp', 'win', x])
 
+      for i in range(0, len(wins)):
+        sw.writerow([test_array[i], wins[i]])
 
+def HeroIDTest (players, hID):
+  ids = list(p.hero_id for p in players)
+  return hID in ids
 
-  with open('values.csv', 'wb') as csvfile:
-    swriter = csv.writer(csvfile, delimiter=',')
+def MultiHeroIDTest (players, h_ids):
+  ids = list(p.hero_id for p in players)
 
-    swriter.writerow(['in', 'win'])
-    for i in range(0, len(wins)):
-      swriter.writerow([in_games[i], wins[i]])
+  for h in h_ids:
+    if h not in ids:
+      return False
+  return True
 
+def TestAllHeroes (games):
+  for h in _hero_data:
+    test_name = 'hero/single/' + _hero_data[str(h)]['localized_name']
+    LinearRegression(test_name, HeroIDTest, games, int(h))
+
+def TestAllPairs (games):
+  for h in _hero_data:
+    for j in _hero_data:
+      if not h == j:
+
+        test_name = 'hero/dual/' + _hero_data[str(h)]['localized_name'] + '_' + _hero_data[str(j)]['localized_name']
+        args = [h, j]
+        LinearRegression(test_name, MultiHeroIDTest, games, args)
+
+def TestAllTrips (games):
+  for h in _hero_data:
+    for j in _hero_data:
+      if not h == j:
+        for k in _hero_data:
+          if k != j and k != h:
+            test_name = 'hero/trip/' + _hero_data[str(h)]['localized_name'] + '_' + _hero_data[str(j)]['localized_name'] + '_' + _hero_data[str(k)]['localized_name']
+            args = [h, j, k]
+            LinearRegression(test_name, MultiHeroIDTest, games, args)
+
+def TestAllQuads (games):
+  for h in _hero_data:
+    for j in _hero_data:
+      if not (h == j):
+        for k in _hero_data:
+          if not (k == h or k == j):
+            for i in _hero_data:
+              if not (i == k or i == j or i == h):
+                test_name = 'hero/quad/' + _hero_data[str(h)]['localized_name'] + '_' + _hero_data[str(j)]['localized_name'] + '_' + _hero_data[str(k)]['localized_name'] + '_' + _hero_data[str(i)]['localized_name']
+                args = [h, j, k, i]
+                LinearRegression(test_name, MultiHeroIDTest, games, args)
+
+def TestAllPentas (games):
+  for h in _hero_data:
+    for j in _hero_data:
+      if not (h == j):
+        for k in _hero_data:
+          if not (k == h or k == j):
+            for i in _hero_data:
+              if not (i == k or i == j or i == h):
+                for l in _hero_data:
+                  if not (l == i or l == k or l == j or l == h):
+                    test_name = 'hero/pent/' + _hero_data[str(h)]['localized_name'] + '_' + _hero_data[str(j)]['localized_name'] + '_' + _hero_data[str(k)]['localized_name'] + '_' + _hero_data[str(i)]['localized_name'] + '_' + _hero_data[str(l)]['localized_name']
+                    args = [h, j, k, i, l]
+                    LinearRegression(test_name, MultiHeroIDTest, games, args)
 
 games = GameData.query.all()
-HeroWinrate(5, games)
+
+TestAllHeroes(games)
+TestAllPairs(games)
+TestAllTrips(games)
+TestAllQuads(games)
+TestAllPentas(games)

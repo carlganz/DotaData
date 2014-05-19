@@ -46,6 +46,7 @@ a, a:visited, a:focus, a:hover, a:active {
 
 .game-panel {
   background-color:#242424;
+  border-width:2px;
 }
 
 .game-body {
@@ -128,6 +129,12 @@ a, a:visited, a:focus, a:hover, a:active {
 .skill-img-box {
   padding:0;
 }
+
+.hero_panel_img {
+  margin:0;
+  padding:1px;
+}
+
 
 
 /* ---------------------------------------------------------

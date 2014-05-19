@@ -29,7 +29,7 @@ class PrettyGame:
 class PrettyPlayer:
   def __init__(self, player):
     self.hero_id = GetHeroNameFromID(player.hero_id)
-    self.portrait_url = GetHeroPortraitFromID(player.hero_id)
+    self.portrait_url = GetLargePortraitFromID(player.hero_id)
     self.account_id = LookupAccountID(player.account_id) if player.account_id != 4294967295 else 'Private'
     self.assists = player.assists
     self.deaths = player.deaths

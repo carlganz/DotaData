@@ -1,0 +1,22 @@
+{% block hero_panel %}
+
+
+    <table width="100%">
+      {% for i in range(0, 8) %}
+      <tr>
+        {% for j in range(0, 15) %}
+        <td width = "{{100 / 15}}%">
+          {% set idx = j + i * 15 %}
+          {% if portraits[idx] %}
+            <img id="h{{idx + 1}}" class="hero_panel_img" src="{{portraits[idx]}}"/ width="100%">
+          {% else %}
+            <img id="h{{idx + 1}}" class="hero_panel_img" src="http://placehold.it/42x24"/ width="100%">
+          {% endif %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+
+
+{% endblock %}
