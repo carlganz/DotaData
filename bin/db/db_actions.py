@@ -6,6 +6,9 @@ import json
 
 # This file contains definitions for database cleaning, adding and querying
 
+def GetTableSize ():
+  return GameData.query.count()
+
 def ResetTable():
     db.drop_all()
     db.create_all()
