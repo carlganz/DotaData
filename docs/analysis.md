@@ -1,5 +1,24 @@
 # Analyzing Dota 2 Game Results
 
+## Observations
+
+Observations are merely facts about the data set.
+
+Examples of Observations
+
+>- Total Matches
+>- Total Matches of Game Type
+>- Number of Played Heroes
+>- Number of Purchased Items
+>- Number of Wins
+>- Total Gold Spent
+>- Total Damage Done
+>- Total Tower Damage Done
+>- Total Healing
+>- Total K/D/A
+>- Total LH/D
+
+
 ## Team Tests
 
 These tests are team wide, meaning each game has two results.

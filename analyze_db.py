@@ -116,4 +116,4 @@ def TestAllPentas (games):
 
 games = GameData.query.all()
 
-LinearRegression('item/test', ItemTest, games, 36, 5)
+TestAllHeroes()
