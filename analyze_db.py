@@ -63,7 +63,7 @@ def ItemTest (players, i_id, num = 1):
 
   return count >= num
 
-## Test Sweeps
+## Test Sweeps ##
 def TestAllHeroes (games):
   for h in _hero_data:
     test_name = 'hero/single/' + _hero_data[str(h)]['localized_name']
