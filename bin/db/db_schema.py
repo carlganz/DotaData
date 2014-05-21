@@ -9,10 +9,10 @@ from pprint import pprint
 app = Flask(__name__)
 
 # Absolute Path for Mac
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/djmorrsee/Documents/Programming/WebDev/DotaData/db/d2db01.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/djmorrsee/Documents/Programming/WebDev/DotaData/db/d2db01.db'
 
 # Absolute Path for LinuxMint
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/adminuser/Documents/dota2analytics/db/d2db01.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/adminuser/Documents/dota2analytics/db/d2db01.db'
 
 db = SQLAlchemy(app)
 

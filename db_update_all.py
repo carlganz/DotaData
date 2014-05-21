@@ -2,6 +2,12 @@ from bin.db.db_schema import *
 from bin.api.api_requests import *
 from bin.db.db_actions import *
 
+import sys
+
+output = '/home/adminuser/output.txt'
+sys.stderr = output
+sys.stdout = output
+
 # This program queries the Dota API for the last 500 games and stores the data.
 def GrabAllGames ():
   GrabGamesForSkillLevel(1)
@@ -19,4 +25,5 @@ def GrabGamesForSkillLevel (l):
   AddGames(games, l)
 
 
-GrabAllGames()
+#GrabAllGames()
+print('hello, world!')
