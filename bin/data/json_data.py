@@ -1,17 +1,26 @@
 import json
+import sys, os
 import urllib2
 from pprint import pprint
 
-hero_data = json.load(open('bin/data/hero_data_name.json'))
-hero_portraits = json.load(open('bin/data/hero_portraits.json'))
-hero_portraits_sm = json.load(open('bin/data/hero_portraits_small.json'))
-skill_data = json.load(open('bin/data/my_abilities.json'))
-lobby_data = json.load(open('bin/data/my_lobbies.json'))
-gm_data = json.load(open('bin/data/my_modes.json'))
-item_data = json.load(open('bin/data/my_items.json'))
-account_ids = json.load(open('bin/data/account_ids.json'))
+real_path = os.path.realpath(__file__)
+#print(os.path.dirname(real_path))
+real_path = os.path.dirname(real_path)
 
-_hero_data = json.load(open('bin/data/hero_data.json'))
+#sys.stdout.flush()
+#os.fsync(sys.stdout)
+
+
+hero_data = json.load(open(real_path + '/hero_data_name.json'))
+hero_portraits = json.load(open(real_path + '/hero_portraits.json'))
+hero_portraits_sm = json.load(open(real_path + '/hero_portraits_small.json'))
+skill_data = json.load(open(real_path + '/my_abilities.json'))
+lobby_data = json.load(open(real_path + '/my_lobbies.json'))
+gm_data = json.load(open(real_path + '/my_modes.json'))
+item_data = json.load(open(real_path + '/my_items.json'))
+account_ids = json.load(open(real_path + '/account_ids.json'))
+
+_hero_data = json.load(open(real_path + '/hero_data.json'))
 
 
 def LookupAccountID(aID):

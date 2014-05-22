@@ -26,7 +26,7 @@ def LinearRegression (test_name, test_f, games, *test_args):
       x = x + 1
 
   if not x == 0:
-    filename = 'tests/' + str(test_name) + '.csv'
+    filename = '/home/adminuser/Logs/DotaTests/' + str(test_name) + '.csv'
     if not os.path.exists(os.path.dirname(filename)):
       os.makedirs(os.path.dirname(filename))
 
@@ -117,6 +117,4 @@ def TestAllPentas (games):
                     LinearRegression(test_name, MultiHeroIDTest, games, args)
 
 games = GameData.query.all()
-
-ratio = TotalTimesRadiantWins(games) / len(games)
-print(ratio)
+TestAllHeroes(games)

@@ -1,12 +1,18 @@
+#!/usr/bin/python
+import sys
+import os
+
+filename = '/home/adminuser/Logs/DotaDB/output.txt'
+if not os.path.exists(os.path.dirname(filename)):
+	os.makedirs(os.path.dirname(filename))
+
+output = open(filename, 'w')
+sys.stderr = output
+sys.stdout = output
+
 from bin.db.db_schema import *
 from bin.api.api_requests import *
 from bin.db.db_actions import *
-
-import sys
-
-output = '/home/adminuser/output.txt'
-sys.stderr = output
-sys.stdout = output
 
 # This program queries the Dota API for the last 500 games and stores the data.
 def GrabAllGames ():
@@ -25,5 +31,5 @@ def GrabGamesForSkillLevel (l):
   AddGames(games, l)
 
 
-#GrabAllGames()
-print('hello, world!')
+GrabAllGames()
+output.close()
