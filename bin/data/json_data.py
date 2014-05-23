@@ -3,13 +3,7 @@ import sys, os
 import urllib2
 from pprint import pprint
 
-real_path = os.path.realpath(__file__)
-#print(os.path.dirname(real_path))
-real_path = os.path.dirname(real_path)
-
-#sys.stdout.flush()
-#os.fsync(sys.stdout)
-
+real_path = os.path.dirname(os.path.realpath(__file__))
 
 hero_data = json.load(open(real_path + '/hero_data_name.json'))
 hero_portraits = json.load(open(real_path + '/hero_portraits.json'))
@@ -21,7 +15,6 @@ item_data = json.load(open(real_path + '/my_items.json'))
 account_ids = json.load(open(real_path + '/account_ids.json'))
 
 _hero_data = json.load(open(real_path + '/hero_data.json'))
-
 
 def LookupAccountID(aID):
 	return str(account_ids[str(aID)]) if str(aID) in account_ids else aID

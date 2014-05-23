@@ -5,18 +5,14 @@
    after all.
    ---------------------------------------------------------*/
 body, html {
-    font-family:monospace;
-    background-color:#0d0d0d;
-    color:#FDFDFD !important;
+  font-family:Courier;
 }
 
 .panel {
-  background-color:#343434;
   border-color:#500;
 }
 
 .panel-heading {
-  background-color:#151515 !important;
   border-color:#400 !important;
   color:#F00 !important;
 }
@@ -24,6 +20,10 @@ body, html {
 .skill-table, .skill-table tr, .skill-table tr td {
   padding:0;
   margin:0;
+}
+
+table th {
+  background-color:#eee;
 }
 
 p, h1, h2, h3, img {
@@ -40,12 +40,10 @@ a, a:visited, a:focus, a:hover, a:active {
    ---------------------------------------------------------*/
 
 .page-title {
-  font-family:Arial;
   color:#F00;
 }
 
 .game-panel {
-  background-color:#242424;
   border-width:2px;
 }
 
@@ -133,6 +131,14 @@ a, a:visited, a:focus, a:hover, a:active {
 .hero_panel_img {
   margin:0;
   padding:1px;
+}
+
+#team0 {
+  background-color:#efe;
+}
+
+#team1 {
+  background-color:#fee;
 }
 
 

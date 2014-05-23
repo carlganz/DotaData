@@ -1,10 +1,6 @@
 from bin.db.db_actions import GetTableSize
-import os, sys
+from bin.util.logs import *
 
-filename = '/home/adminuser/output2.txt'
-output = open(filename, 'w')
-
-sys.stdout = output
-sys.stderr = output
+SetOutputFile('table_size.txt')
 
 print(GetTableSize())

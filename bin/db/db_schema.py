@@ -3,16 +3,16 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from bin.api.api_requests import *
-import random
+import random, os
 from pprint import pprint
 
 app = Flask(__name__)
 
-# Absolute Path for Mac
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/djmorrsee/Documents/Programming/WebDev/DotaData/db/d2db01.db'
+this_file_path = os.path.dirname(os.path.realpath(__file__))
+db_path = this_file_path + '/../../db/d2db01.db'
 
-# Absolute Path for LinuxMint
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/adminuser/Documents/dota2analytics/db/d2db01.db'
+# Absolute Path #
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
 
 db = SQLAlchemy(app)
 

@@ -1,14 +1,7 @@
 #!/usr/bin/python
-import sys
-import os
+from bin.util.logs import *
 
-filename = '/home/adminuser/Logs/DotaDB/output.txt'
-if not os.path.exists(os.path.dirname(filename)):
-	os.makedirs(os.path.dirname(filename))
-
-output = open(filename, 'w')
-sys.stderr = output
-sys.stdout = output
+SetOutputFile('update_all.txt')
 
 from bin.db.db_schema import *
 from bin.api.api_requests import *
@@ -27,9 +20,6 @@ def GrabGamesForSkillLevel (l):
   req.SetSkillLevel(l)
 
   games = req.MakeRequest()
-  print(len(games))
   AddGames(games, l)
 
-
 GrabAllGames()
-output.close()

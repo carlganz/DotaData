@@ -1,10 +1,15 @@
 from __future__ import division
+from bin.util.logs import *
+
+SetOutputFile('analyze.txt')
+
 from bin.db.db_schema import *
 from bin.db.db_actions import *
 from bin.db.db_observations import *
+from bin.db.db_report import *
 from bin.data.json_data import _hero_data
-import csv
-import os
+import csv, os, json
+from pprint import pprint
 
 # The one function to rule them all
 def LinearRegression (test_name, test_f, games, *test_args):
@@ -116,5 +121,26 @@ def TestAllPentas (games):
                     args = [h, j, k, i, l]
                     LinearRegression(test_name, MultiHeroIDTest, games, args)
 
-games = GameData.query.all()
-TestAllHeroes(games)
+def CreateOverallStatsReport ():
+  normal_games_q = GameData.query.filter(GameData.skill_rating == 1)
+  high_games_q = GameData.query.filter(GameData.skill_rating == 2)
+  vhigh_games_q = GameData.query.filter(GameData.skill_rating == 3)
+  #account_games =
+  n_r = Report(normal_games_q)
+  h_r = Report(high_games_q)
+  vh_r = Report(vhigh_games_q)
+
+  n_d = n_r.GetDictionary()
+  h_d = h_r.GetDictionary()
+  vh_d = vh_r.GetDictionary()
+
+  report = {}
+  report.update({'normal':n_d})
+  report.update({'high':h_d})
+  report.update({'very_high':vh_d})
+
+  pprint(report)
+
+
+
+CreateOverallStatsReport()

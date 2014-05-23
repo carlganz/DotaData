@@ -9,19 +9,17 @@
     <h3>Details for Match: {{game.match_id}}</h3>
   </div>
   <div class="panel-body overview-body" align="center">
+    
       <p class="col-sm-3">{{ game.start_time }}</p>
       <p class="col-sm-3">Duration: {{ "{0:.2f}".format(game.duration / 60) }} minutes</p>
       <p class="col-sm-3">Mode: {{ game.game_mode }}</p>
       <p class="col-sm-3">{% if game.radiant_win %} Radiant {% else %} Dire {% endif %} Victory!</p>
+
+      <button type="button" class="btn btn-default" id="individual">Individual</button>
+      <button type="button" class="btn btn-default" id="grouped">Grouped</button>
   </div>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-body" align="center">
-    <button type="button" class="btn btn-default" id="individual">Individual</button>
-    <button type="button" class="btn btn-default" id="grouped">Grouped</button>
-  </div>
-</div>
 
 {% for i in range(0,2) %}
 

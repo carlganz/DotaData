@@ -1,8 +1,10 @@
-db/*.db
 R/
 tests/
-*.pyc
 .venv/
+
 .DS_Store
 .Rapp.history
+
+*.db
 *.csv
+*.pyc

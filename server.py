@@ -12,9 +12,10 @@ from bin.db.db_schema import GameData, PlayerData, AbilityUpgrades
 # Utility
 from bin.util.filters import *
 
-# Setup App Server
+# Setup App Server #
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/d2db01.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/d2db01.db' # Relative Path
 db = SQLAlchemy(app)
 
 @app.route('/')
