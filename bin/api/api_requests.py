@@ -62,7 +62,7 @@ class GameRequest:
       r += str(start) + str(self.start_ma_id)
 
     if self.mode != None:
-      r += str(game_mode) + str(self.game_mode)
+      r += str(game_mode) + str(self.mode)
 
     if self.skill != None:
       r += str(skill) + str(self.skill)

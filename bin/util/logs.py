@@ -2,6 +2,7 @@ import os, sys
 import time
 
 logs_folder = str(os.path.expanduser('~')) + '/Logs/'
+logger = None
 
 def SetOutputFile (filename):
   file = logs_folder + str(filename)
@@ -13,7 +14,18 @@ def SetOutputFile (filename):
   file = str(root) + '-' + str(time.strftime('%d-%H-%M-%S')) + str(ext)
 
 
-  output = open(file, 'w')
+  logger = open(file, 'w')
 
-  sys.stdout = output
-  sys.stderr = output
+  sys.stdout = logger
+  sys.stderr = logger
+
+
+def SyncLogger ():
+  if not logger == None:
+    logger.flush()
+    os.fsync(logger.fileno())
+
+
+def Logg(o):
+  print(o)
+  SyncLogger()

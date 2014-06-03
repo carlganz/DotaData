@@ -7,8 +7,8 @@ from bin.db.db_schema import *
 from bin.db.db_actions import *
 from bin.db.db_observations import *
 from bin.db.db_report import *
-from bin.data.json_data import _hero_data
-import csv, os, json
+from bin.data.json_data import hero_data
+import csv, os, json, time, threading
 from pprint import pprint
 
 # The one function to rule them all
@@ -121,26 +121,24 @@ def TestAllPentas (games):
                     args = [h, j, k, i, l]
                     LinearRegression(test_name, MultiHeroIDTest, games, args)
 
-def CreateOverallStatsReport ():
-  normal_games_q = GameData.query.filter(GameData.skill_rating == 1)
-  high_games_q = GameData.query.filter(GameData.skill_rating == 2)
-  vhigh_games_q = GameData.query.filter(GameData.skill_rating == 3)
-  #account_games =
-  n_r = Report(normal_games_q)
-  h_r = Report(high_games_q)
-  vh_r = Report(vhigh_games_q)
 
-  n_d = n_r.GetDictionary()
-  h_d = h_r.GetDictionary()
-  vh_d = vh_r.GetDictionary()
+def CreateReportForGames(games, label):
+  #SetOutputFile(str(label) + '.txt')
 
-  report = {}
-  report.update({'normal':n_d})
-  report.update({'high':h_d})
-  report.update({'very_high':vh_d})
+  # report = bin.db.db_report.Report(games)
+  # r_dict = report.GetDictionary()
+  #
+  # d = {label:r_dict}
+  # print(json.dumps(d, indent=2, sort_keys=True))
 
-  pprint(report)
+  print(GameData.query.count())
 
 
+x = time.time()
 
-CreateOverallStatsReport()
+for i in range(1, 11):
+  games = GameData.query.paginate(i, per_page=100).items
+  args = (games, 'set' + str(i))
+  thread.start_new_thread(CreateReportForGames, (games, args,))
+
+print(time.time() - x)

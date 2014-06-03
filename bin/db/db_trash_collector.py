@@ -1,38 +1,63 @@
 from bin.db.db_schema import *
 from pprint import pprint
 
+verbose = False
+
 def IsTrash (game):
   if FailTimeCheck(game):
+    if verbose:
+      print('Failed Time Check')
     return True
 
   if FailTowerCheck(game):
+    if verbose:
+      print('Failed Tower Check')
     return True
 
   if FailRaxCheck(game):
+    if verbose:
+      print('Failed Rax Check')
     return True
 
   for p in game.players:
     if FailRealCheck(p):
+      if verbose:
+        print('Failed Real Check')
       return True
     if FailKDACheck(p):
+      if verbose:
+        print('Failed KDA Check')
       return True
     if FailLHDCheck(p):
+      if verbose:
+        print('Failed LHD Check')
       return True
     if FailExperienceCheck(p):
+      if verbose:
+        print('Failed XP Check')
       return True
     if FailGoldCheck(p):
+      if verbose:
+        print('Failed Gold Check')
       return True
     if FailDamageCheck(p):
+      if verbose:
+        print('Failed Damage Check')
       return True
 
   return False
+
 
 
 # Game Checks
 def FailTimeCheck (game):
   if game.duration < 600:
-      return True
+    if verbose:
+      print('Duration: ' + str(game.duration))
+    return True
   return False
+
+
 
 def FailTowerCheck (game):
   # Fails if all towers are still up
